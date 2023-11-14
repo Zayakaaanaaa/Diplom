@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "771499844274",
+    "project_id": "diplom-aad4e",
+    "storage_bucket": "diplom-aad4e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771499844274:android:86f01024b3cfbce9cadfab",
+        "android_client_info": {
+          "package_name": "com.example.grocery_store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg60glp2z4kJzg_gw2cznnOoTaCwPJfg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
