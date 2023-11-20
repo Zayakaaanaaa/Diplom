@@ -4,20 +4,22 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:grocery_store/pages/home.dart';
-import 'package:grocery_store/pages/login_screen.dart';
+import 'package:grocery_store/pages/auth/login_screen.dart';
 import 'package:grocery_store/pages/profile/get_profile_information_screen.dart';
-import 'package:grocery_store/pages/profile/map_screen.dart';
-import 'package:grocery_store/pages/sign_up_screen.dart';
+import 'package:grocery_store/pages/map/map_screen.dart';
+import 'package:grocery_store/pages/auth/sign_up_screen.dart';
 import 'package:grocery_store/pages/splash_screen.dart';
 import 'package:grocery_store/util/constants.dart';
 import 'package:grocery_store/util/routes.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:sizer/sizer.dart';
-
+import 'pages/map/map.dart';
 import 'util/utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(MyApp());
 }
 
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
               fontFamily: 'Gilroy',
               primaryColor: kPrimaryColor,
               scaffoldBackgroundColor: kScaffoldColor),
-          home: MapScreen(
+          home: SplashScreen(
               // productId: 1,
               ),
         );

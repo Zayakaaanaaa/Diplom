@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grocery_store/pages/login_screen.dart';
-import 'package:grocery_store/pages/sign_up_screen.dart';
+import 'package:grocery_store/pages/auth/login_screen.dart';
+import 'package:grocery_store/pages/auth/sign_up_screen.dart';
 import 'package:grocery_store/util/constants.dart';
 import 'package:grocery_store/widgets/text_button.dart';
 import 'package:sizer/sizer.dart';

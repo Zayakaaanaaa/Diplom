@@ -1,16 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_store/pages/home.dart';
-import 'package:grocery_store/pages/login_screen.dart';
+import 'package:grocery_store/pages/auth/login_screen.dart';
 import 'package:grocery_store/util/constants.dart';
 import 'package:grocery_store/widgets/custom_text_field.dart';
 import 'package:grocery_store/widgets/text_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sizer/sizer.dart';
 
-import '../util/routes.dart';
-import '../util/utils.dart';
-import '../widgets/custom_textform_field.dart';
-import 'profile/get_profile_information_screen.dart';
+import '../../util/routes.dart';
+import '../../util/utils.dart';
+import '../../widgets/custom_textform_field.dart';
+import '../profile/get_profile_information_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -63,13 +65,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               Text(kSignUpText1, style: kRegular12),
               SizedBox(height: 3.h),
-              CustomTextField(
-                hintText: 'Enter your username',
-                label: 'Username',
-                controller: _usernameController,
-                obScure: false,
-                icon: false,
-              ),
+              // CustomTextField(
+              //   hintText: 'Enter your username',
+              //   label: 'Username',
+              //   controller: _usernameController,
+              //   obScure: false,
+              //   icon: false,
+              // ),
               SizedBox(height: 2.h),
               CustomTextFormField(
                 hintText: 'Enter your email',
@@ -86,7 +88,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   label: 'Password',
                   controller: _passwordController,
                   obScure: true),
-              SizedBox(height: 2.h),
+              SizedBox(height: 5.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -101,6 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ],
               ),
+              SizedBox(height: 2.h),
               CustomTextButton(
                   text: 'Sign Up',
                   onPressed: () {
@@ -109,7 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     print(_usernameController.text);
                     signUp();
                   }),
-              const SizedBox(height: 20),
+              SizedBox(height: 10.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -134,19 +137,55 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  // Future signUp() async {
+  //   try {
+  //     await FirebaseAuth.instance.createUserWithEmailAndPassword(
+  //       email: _emailController.text.trim(),
+  //       password: _passwordController.text.trim(),
+  //     );
+  //     // profileInformationScreen();
+  //     Navigator.pushNamed(context, 'ProfileInformationScreen');
+  //   } on FirebaseAuthException catch (error) {
+  //     print(error);
+
+  //     Utils.showSnackBar(error.message);
+  //   }
+  //   // navigatorKey.currentState!.popUntil((route) => route.isFirst);
+  // }
   Future signUp() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      // Creating user with Firebase Authentication
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
-      // profileInformationScreen();
+
+      // Get the user ID from the created user
+      String userId = userCredential.user!.uid;
+
+      // Set up data to be saved in Firestore (customize as needed)
+      Map<String, dynamic> userData = {
+        "email": _emailController.text.trim(),
+        // Add any additional fields you want to store, like "displayName", "createdAt", etc.
+      };
+
+      // Store the user data in Firestore
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .set(userData);
+
+      // Navigate to ProfileInformationScreen
       Navigator.pushNamed(context, 'ProfileInformationScreen');
     } on FirebaseAuthException catch (error) {
       print(error);
-
-      Utils.showSnackBar(error.message);
+      Utils.showSnackBar(error
+          .message); // Assuming Utils is a utility class you have for showing snack bars
+    } catch (e) {
+      // Handle any other errors
+      print(e);
+      Utils.showSnackBar(e.toString());
     }
-    // navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }

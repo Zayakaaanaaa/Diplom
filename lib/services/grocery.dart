@@ -1,11 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grocery_store/model/cart_list.dart';
 import 'package:grocery_store/model/product_detail.dart';
 import 'package:grocery_store/model/store.dart';
+import 'package:grocery_store/model/store_sector.dart';
 import 'package:grocery_store/widgets/category_card.dart';
 import 'package:grocery_store/widgets/product_card.dart';
-
 import '../model/category.dart';
+import '../model/store_price.dart';
+import '../model/user.dart';
 import '../widgets/cart_item_card.dart';
 import '../widgets/favorite_card.dart';
 import '../widgets/store_card.dart';
@@ -18,7 +22,7 @@ List<ProductDetails> listItems = [
       catId: 5,
       img: 'assets/images/oil.png',
       name: '11111111111',
-      price: 512,
+      price: [],
       size: "2dfs",
       productDetailTitle: 'fsdfw',
       productDetail:
@@ -35,7 +39,7 @@ List<ProductDetails> listItems = [
       catId: 5,
       img: 'assets/images/oil.png',
       name: '11111111111',
-      price: 512,
+      price: [],
       size: "2dfs",
       productDetailTitle: 'fsdfw',
       productDetail:
@@ -52,7 +56,7 @@ List<ProductDetails> listItems = [
       catId: 5,
       img: 'assets/images/oil.png',
       name: '11111111111',
-      price: 512,
+      price: [],
       size: "2dfs",
       productDetailTitle: 'fsdfw',
       productDetail:
@@ -69,7 +73,7 @@ List<ProductDetails> listItems = [
       catId: 5,
       img: 'assets/images/oil.png',
       name: '11111111111',
-      price: 512,
+      price: [],
       size: "2dfs",
       productDetailTitle: 'fsdfw',
       productDetail:
@@ -86,7 +90,7 @@ List<ProductDetails> listItems = [
       catId: 5,
       img: 'assets/images/oil.png',
       name: '11111111111',
-      price: 512,
+      price: [],
       size: "2dfs",
       productDetailTitle: 'fsdfw',
       productDetail:
@@ -103,7 +107,7 @@ List<ProductDetails> listItems = [
       catId: 5,
       img: 'assets/images/oil.png',
       name: '11111111111',
-      price: 512,
+      price: [],
       size: "2dfs",
       productDetailTitle: 'fsdfw',
       productDetail:
@@ -112,6 +116,309 @@ List<ProductDetails> listItems = [
           'productDetailproductDetailproductDetailproductDetailproductDetailproductDetail',
       nutritionTitle: 'productDetail',
     ),
+  ),
+];
+
+List<ProductDetail> newProducts = [
+  ProductDetail(
+    catId: 0,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'Milk ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 1.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 3, price: 2.00),
+      PriceStores(storeId: 4, price: 2.50),
+      PriceStores(storeId: 5, price: 2.10),
+      PriceStores(storeId: 6, price: 1.70),
+    ],
+  ),
+  ProductDetail(
+    catId: 0,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'Sugar ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 1.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 3, price: 3.00),
+      PriceStores(storeId: 4, price: 4.50),
+      PriceStores(storeId: 5, price: 5.10),
+      PriceStores(storeId: 6, price: 6.70),
+    ],
+  ),
+  ProductDetail(
+    catId: 0,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'Chips ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 4.99),
+      PriceStores(storeId: 2, price: 4.09),
+      PriceStores(storeId: 3, price: 6.09),
+      PriceStores(storeId: 4, price: 1.09),
+      PriceStores(storeId: 5, price: 8.09),
+      PriceStores(storeId: 6, price: 9.09),
+    ],
+  ),
+  ProductDetail(
+    catId: 1,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'Fanta ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 4.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 3, price: 2.09),
+      PriceStores(storeId: 4, price: 1.09),
+      PriceStores(storeId: 5, price: 42.09),
+      PriceStores(storeId: 6, price: 28.09),
+    ],
+  ),
+  ProductDetail(
+    catId: 1,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'Phone ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 1.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 3, price: 3.00),
+      // PriceStores(storeId: 4, price: 2.50),
+      PriceStores(storeId: 5, price: 2.70),
+      PriceStores(storeId: 6, price: 4.30),
+    ],
+  ),
+  ProductDetail(
+    catId: 2,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'Milk ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 1.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 3, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+    ],
+  ),
+  ProductDetail(
+    catId: 2,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'Milk3 ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 1.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+    ],
+  ),
+  ProductDetail(
+    catId: 3,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'orange ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 1.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+    ],
+  ),
+  ProductDetail(
+    catId: 4,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'apple ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 1.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+    ],
+  ),
+  ProductDetail(
+    catId: 4,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'Ice cream ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 1.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+    ],
+  ),
+  ProductDetail(
+    catId: 4,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'Potato ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 1.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+    ],
+  ),
+  ProductDetail(
+    catId: 4,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'Tomato ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 1.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+    ],
+  ),
+  ProductDetail(
+    catId: 4,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'Candy ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 1.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+    ],
+  ),
+  ProductDetail(
+    catId: 5,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'Beeer ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 1.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+    ],
+  ),
+  ProductDetail(
+    catId: 5,
+    // id: 0,
+    barcode: '123456789',
+    img: 'path/to/image',
+    name: 'Apple',
+    size: '1kg',
+    productDetailTitle: 'Meat ',
+    productDetail: 'Detailed description of the product',
+    nutritionDetail: 'Nutritional information',
+    nutritionTitle: 'Nutrition Title',
+    price: [
+      PriceStores(storeId: 1, price: 1.99),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+      PriceStores(storeId: 2, price: 2.09),
+    ],
   ),
 ];
 
@@ -296,6 +603,12 @@ List<StoreCard> storeList = [
         img: 'assets/stores/emart.jpg',
         phone: '12345678',
         name: 'Emart',
+        sectors: [
+          StoreSector(
+              sectorId: 0,
+              sectorLng: LatLng(47.87190394101417, 106.83035418021754),
+              sectorName: 'asdadw')
+        ],
         price: 5.98),
   ),
   StoreCard(
@@ -304,6 +617,40 @@ List<StoreCard> storeList = [
         storeId: 0,
         img: 'assets/stores/carrefour.png',
         phone: '12345678',
+        sectors: [
+          StoreSector(
+              sectorId: 0,
+              sectorLng: LatLng(47.87190394101417, 106.83035418021754),
+              sectorName: 'asdadw'),
+          StoreSector(
+              sectorId: 0,
+              sectorLng: LatLng(47.878049862258365, 106.90971141206951),
+              sectorName: 'asdadw'),
+          StoreSector(
+              sectorId: 0,
+              sectorLng: LatLng(47.90774587454703, 106.87870769359223),
+              sectorName: 'asdadw'),
+          StoreSector(
+              sectorId: 0,
+              sectorLng: LatLng(47.93446787053064, 106.81835716669585),
+              sectorName: 'asdadw'),
+          StoreSector(
+              sectorId: 0,
+              sectorLng: LatLng(47.92325599188884, 106.94358201217408),
+              sectorName: 'asdadw'),
+          StoreSector(
+              sectorId: 0,
+              sectorLng: LatLng(47.93845088229213, 106.93620142360592),
+              sectorName: 'asdadw'),
+          StoreSector(
+              sectorId: 0,
+              sectorLng: LatLng(47.937197349038755, 106.91374796000875),
+              sectorName: 'asdadw'),
+          StoreSector(
+              sectorId: 0,
+              sectorLng: LatLng(47.92466034490062, 106.91842576492482),
+              sectorName: 'asdadw'),
+        ],
         name: 'Carrefour',
         price: 6.1),
   ),
@@ -314,6 +661,12 @@ List<StoreCard> storeList = [
         img: 'assets/stores/minii.png',
         phone: '12345678',
         name: 'Minii suljee',
+        sectors: [
+          StoreSector(
+              sectorId: 0,
+              sectorLng: LatLng(47.87190394101417, 106.83035418021754),
+              sectorName: 'asdadw')
+        ],
         price: 6.5),
   ),
   StoreCard(
@@ -323,6 +676,12 @@ List<StoreCard> storeList = [
         img: 'assets/stores/mmart.png',
         phone: '12345678',
         name: 'M mart',
+        sectors: [
+          StoreSector(
+              sectorId: 0,
+              sectorLng: LatLng(47.87190394101417, 106.83035418021754),
+              sectorName: 'asdadw')
+        ],
         price: 5.74),
   ),
   StoreCard(
@@ -332,6 +691,12 @@ List<StoreCard> storeList = [
         img: 'assets/stores/nomin.png',
         phone: '12345678',
         name: 'Nomin',
+        sectors: [
+          StoreSector(
+              sectorId: 0,
+              sectorLng: LatLng(47.87190394101417, 106.83035418021754),
+              sectorName: 'asdadw')
+        ],
         price: 7.1),
   ),
   StoreCard(
@@ -341,6 +706,12 @@ List<StoreCard> storeList = [
         img: 'assets/stores/sansar.jpg',
         phone: '12345678',
         name: 'Sansar',
+        sectors: [
+          StoreSector(
+              sectorId: 0,
+              sectorLng: LatLng(47.87190394101417, 106.83035418021754),
+              sectorName: 'asdadw')
+        ],
         price: 6.6),
   ),
 ];
@@ -367,10 +738,27 @@ class GroceryModel {
   //       productDetail: "productDetail",
   //       price: 23));
   // }
+
   static List<ProductDetails> getProductDetail() {
     List<ProductDetails> temp = [];
     for (int i = 0; i < listItems.length; i++) {
       temp.add(listItems[i]);
+    }
+    return temp;
+  }
+
+  static List<ProductDetail> addProduct() {
+    List<ProductDetail> temp = [];
+    for (int i = 0; i < newProducts.length; i++) {
+      temp.add(newProducts[i]);
+    }
+    return temp;
+  }
+
+  static List<StoreSector> getStoreSector(int id) {
+    List<StoreSector> temp = [];
+    for (int i = 0; i < storeList[id].storeCards.sectors.length; i++) {
+      temp.add(storeList[id].storeCards.sectors[i]);
     }
     return temp;
   }
@@ -405,6 +793,58 @@ class GroceryModel {
       temp.add(storeList[i]);
     }
     return temp;
+  }
+
+  Future<List<ProductDetails>> getAllProducts() async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    QuerySnapshot querySnapshot = await firestore.collection('products').get();
+
+    List<ProductDetails> temp = [];
+
+    List<ProductDetail> products = querySnapshot.docs.map((doc) {
+      return ProductDetail.fromDocumentSnapshot(doc);
+    }).toList();
+
+    for (var element in products) {
+      temp.add(
+        ProductDetails(productDetail: element),
+      );
+    }
+
+    return temp;
+  }
+
+  Future<ProductDetail> getProductDetail1(String documentId) async {
+    DocumentSnapshot doc = await FirebaseFirestore.instance
+        .collection('products')
+        .doc(documentId)
+        .get();
+
+    if (doc.exists) {
+      return ProductDetail.fromDocumentSnapshot(doc);
+    } else {
+      throw Exception('Product not found');
+    }
+  }
+
+  Future<UserModel> getUserData(String userId) async {
+    DocumentSnapshot doc =
+        await FirebaseFirestore.instance.collection('users').doc(userId).get();
+
+    if (doc.exists) {
+      return UserModel.fromDocumentSnapshot(doc);
+    } else {
+      throw Exception('User not found');
+    }
+  }
+
+  Future<void> addProductsToFirestore(List<ProductDetail> products) async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    for (var product in products) {
+      // Let Firestore generate a unique ID
+      await firestore.collection('products').add(product.toMap());
+    }
   }
 
   // static List<ProductCard> getProducts() {

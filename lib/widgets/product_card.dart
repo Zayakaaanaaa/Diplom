@@ -20,7 +20,7 @@ class ProductDetails extends StatelessWidget {
           context,
           MaterialPageRoute(
               builder: (context) => DetailScreen(
-                    productId: productDetail.id,
+                    productId: productDetail.id!,
                   )),
         );
         // await navi.newScreen(

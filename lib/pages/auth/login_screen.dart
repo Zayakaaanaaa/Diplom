@@ -1,18 +1,19 @@
 // ignore_for_file: prefer_final_fields, use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_store/pages/home.dart';
 import 'package:grocery_store/pages/onboarding_screen.dart';
-import 'package:grocery_store/pages/sign_up_screen.dart';
+import 'package:grocery_store/pages/auth/sign_up_screen.dart';
 import 'package:grocery_store/util/constants.dart';
 import 'package:grocery_store/util/routes.dart';
 import 'package:grocery_store/widgets/custom_text_field.dart';
 import 'package:grocery_store/widgets/text_button.dart';
 import 'package:sizer/sizer.dart';
 
-import '../util/utils.dart';
-import '../widgets/custom_textform_field.dart';
+import '../../util/utils.dart';
+import '../../widgets/custom_textform_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -124,6 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future signIn() async {
+    // Uncomment the below code to show a loading dialog
     // showDialog(
     //   context: context,
     //   barrierDismissible: false,
@@ -131,28 +133,46 @@ class _LoginScreenState extends State<LoginScreen> {
     //     child: CircularProgressIndicator(),
     //   ),
     // );
+
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      // Signing in the user
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
-      // print('object');
-      Navigator.pushNamed(context, 'HomePage');
 
-      // Navigator.pushNamed(context, HomePage());
-      // newScreen(newScreen: HomePage(), context: context)
-      // await navi.newScreen(
-      //   context: context,
-      //   newScreen: () {
-      //     HomePage();
-      //   },
-      // );
+      // Get the user ID from the signed-in user
+      String userId = userCredential.user!.uid;
+
+      // Fetch the user data from Firestore
+      DocumentSnapshot userData = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .get();
+
+      if (userData.exists) {
+        // Handle the user data as needed
+        Map<String, dynamic> userInfo = userData.data() as Map<String, dynamic>;
+        print('User Info: $userInfo');
+
+        // You can now use userInfo in your app
+      } else {
+        print('No user data found in Firestore');
+      }
+
+      // Navigate to HomePage
+      Navigator.pushNamed(context, 'HomePage');
     } on FirebaseAuthException catch (error) {
       print(error);
-      print(context);
-      // print('obje2222ct');
-      Utils.showSnackBar(error.message);
+      Utils.showSnackBar(error.message); // Displaying the error message
+    } catch (e) {
+      // Handle any other errors
+      print(e);
+      Utils.showSnackBar(e.toString());
     }
-    // navigatorKey.currentState!.popUntil((route) => route.isFirst);
+
+    // Uncomment the below code to close the loading dialog
+    // Navigator.pop(context); // Close the loading dialog
   }
 }

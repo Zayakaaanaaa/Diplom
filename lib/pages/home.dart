@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:grocery_store/model/product_detail.dart';
 import 'package:grocery_store/pages/cart_screen.dart';
 import 'package:grocery_store/pages/favorite_screen.dart';
 import 'package:grocery_store/pages/profile/profile_screen.dart';
@@ -25,12 +27,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  GroceryModel groceryModel = GroceryModel();
   int bottomBarIndex = 0;
   // List<ProductDetails>? _productDetail;
-
   final List<ProductDetails> _productDetail = GroceryModel.getProductDetail();
   final List<StoreCard> _storeDetail = GroceryModel.getStoreDetail();
   final List<String> _carouselItems = GroceryModel.getCarouselItems();
+  Future<List<ProductDetails>>? _products;
+  Future<void> loadData() async {
+    _products = groceryModel.getAllProducts();
+  }
+
+  @override
+  void initState() {
+    loadData();
+    // TODO: implement initState
+    super.initState();
+  }
+  // Future<ProductDetail> product = GroceryModel.getProductDetail1();
 
   @override
   Widget build(BuildContext context) {

@@ -35,7 +35,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           padding: EdgeInsets.only(left: 5.w),
           child: Text(
             widget.label,
-            style: kRegular12,
+            style: kSemibold12,
           ),
         ),
         SizedBox(
@@ -51,8 +51,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
               boxShadow: kBoxShadow),
           child: TextField(
             controller: widget.controller,
-            keyboardType:
-                widget.inputType == true ? TextInputType.emailAddress : null,
+            keyboardType: widget.inputType != true
+                ? TextInputType.emailAddress
+                : TextInputType.phone,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: widget.hintText,
