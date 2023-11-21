@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:grocery_store/model/product_detail.dart';
+import 'package:grocery_store/model/store.dart';
 import 'package:grocery_store/pages/cart_screen.dart';
 import 'package:grocery_store/pages/favorite_screen.dart';
 import 'package:grocery_store/pages/profile/profile_screen.dart';
@@ -30,12 +31,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   GroceryModel groceryModel = GroceryModel();
   int bottomBarIndex = 0;
   // List<ProductDetails>? _productDetail;
-  final List<ProductDetails> _productDetail = GroceryModel.getProductDetail();
-  final List<StoreCard> _storeDetail = GroceryModel.getStoreDetail();
+  // final List<ProductDetails> _productDetail = GroceryModel.getProductDetail();
+  // final List<StoreCard> _storeDetail = GroceryModel.getStoreDetail();
   final List<String> _carouselItems = GroceryModel.getCarouselItems();
   Future<List<ProductDetails>>? _products;
+  Future<List<StoreCard>>? _stores;
+
   Future<void> loadData() async {
     _products = groceryModel.getAllProducts();
+    _stores = groceryModel.getStores();
   }
 
   @override
@@ -65,48 +69,64 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 kSizedBoxHeight,
                 SearchTextField(),
                 kSizedBoxHeight,
-                (_productDetail == null)
-                    ? Container(
-                        height: 25.h,
-                        decoration: const BoxDecoration(color: kPrimaryColor))
-                    : (_productDetail.isEmpty)
-                        ? const Center(
-                            child: Text("k404Text"),
-                          )
-                        : BannerSlider(
-                            carouselItems: _carouselItems,
-                          ),
-                kSizedBoxHeight,
-                CategoryText(),
-                kSizedBoxHeight,
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: (_productDetail == null)
-                      ? Container(
-                          height: 25.h,
-                          decoration: const BoxDecoration(color: kPrimaryColor))
-                      : (_productDetail.isEmpty)
-                          ? const Center(
-                              child: Text("k404Text"),
-                            )
-                          : ProductDetailsContainer(
-                              productDetail: _productDetail,
-                            ),
+                BannerSlider(
+                  carouselItems: _carouselItems,
                 ),
                 kSizedBoxHeight,
                 CategoryText(),
-                SingleChildScrollView(
-                  child: (_storeDetail == null)
-                      ? Container(
-                          height: 25.h,
-                          decoration: const BoxDecoration(color: kPrimaryColor))
-                      : (_storeDetail.isEmpty)
-                          ? const Center(
-                              child: Text("k404Text"),
-                            )
-                          : StoreItemContainer(
-                              storeCard: _storeDetail,
-                            ),
+                kSizedBoxHeight,
+                FutureBuilder<List<ProductDetails>>(
+                  future: _products,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      // Display loading indicator while data is loading
+                      return CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      // Handle error case
+                      return Text("Error: ${snapshot.error}");
+                    } else if (snapshot.hasData) {
+                      // Data loaded successfully
+                      List<ProductDetails> _products = snapshot.data!;
+                      return SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Wrap(
+                            children: [
+                              ProductDetailsContainer(
+                                  productDetail: _products), // Adjusted
+                            ],
+                          )
+                          // ProductDetails(productDetail: _products), // Adjusted
+                          );
+                    } else {
+                      // Handle no data case
+                      return Text("No products found");
+                    }
+                  },
+                ),
+                kSizedBoxHeight,
+                CategoryText(),
+                FutureBuilder<List<StoreCard>>(
+                  future: _stores,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      // Display loading indicator while data is loading
+                      return CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      // Handle error case
+                      return Text("Error: ${snapshot.error}");
+                    } else if (snapshot.hasData) {
+                      // Data loaded successfully
+                      List<StoreCard> _stores = snapshot.data!;
+                      return SingleChildScrollView(
+                        child: StoreItemContainer(
+                          storeCard: _stores,
+                        ),
+                      );
+                    } else {
+                      // Handle no data case
+                      return Text("No products found");
+                    }
+                  },
                 ),
               ],
             ),
@@ -248,11 +268,3 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 }
-
-// class Behavior extends ScrollBehavior {
-//   @override
-//   Widget buildViewport(
-//       BuildContext context, Widget child, AxisDirection axisDirection) {
-//     return child;
-//   }
-// }

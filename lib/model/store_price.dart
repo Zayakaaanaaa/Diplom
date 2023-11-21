@@ -22,4 +22,18 @@ class PriceStores {
       price: (json['price'] as num).toDouble(),
     );
   }
+  PriceStores getCheapestPrice(List<PriceStores> prices) {
+    if (prices.isEmpty) {
+      throw Exception('Price list is empty');
+    }
+
+    PriceStores cheapest = prices[0];
+    for (PriceStores priceStore in prices) {
+      if (priceStore.price < cheapest.price) {
+        cheapest = priceStore;
+      }
+    }
+
+    return cheapest;
+  }
 }

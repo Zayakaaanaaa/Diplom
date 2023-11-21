@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_store/model/store.dart';
 import 'package:grocery_store/model/user.dart';
+import 'package:grocery_store/widgets/store_card.dart';
 import 'package:sizer/sizer.dart';
 
 import '../model/product_detail.dart';
@@ -22,7 +26,10 @@ class UserProfile extends StatefulWidget {
 
 class _UserProfileState extends State<UserProfile> {
   GroceryModel groceryModel = GroceryModel();
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final List<ProductDetail> newProducts = GroceryModel.addProduct();
+  final List<StoreDetail> newStores = GroceryModel.addStore();
+
   Future<List<ProductDetails>>? _products;
 
   Future<void> loadData() async {
@@ -33,7 +40,6 @@ class _UserProfileState extends State<UserProfile> {
   void initState() {
     // TODO: implement initState
     loadData();
-
     super.initState();
   }
 
@@ -71,15 +77,26 @@ class _UserProfileState extends State<UserProfile> {
                 }
               },
             ),
-            // SingleChildScrollView(
-            //   scrollDirection: Axis.horizontal,
-            //   child: (_products == null)
-            //       ? Container(
-            //           height: 25.h,
-            //           decoration: const BoxDecoration(color: kPrimaryColor),
-            //         )
-            //       : ProductDetails(productDetail: _products),
-            // ),
+            TextButton(
+              onPressed: () async {
+                for (ProductDetail product in newProducts) {
+                  await firestore
+                      .collection('productDetails')
+                      .add(product.toMap());
+                }
+                print('success');
+              },
+              child: Text('Add prodcut'),
+            ),
+            TextButton(
+              onPressed: () async {
+                for (StoreDetail store in newStores) {
+                  await firestore.collection('stores').add(store.toMap());
+                }
+                print('success');
+              },
+              child: Text('Add store'),
+            ),
             CustomTextButton(
               onPressed: () {
                 Navigator.push(

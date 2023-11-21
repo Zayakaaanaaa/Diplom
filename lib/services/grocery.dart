@@ -17,105 +17,87 @@ import '../widgets/store_card.dart';
 List<ProductDetails> listItems = [
   ProductDetails(
     productDetail: ProductDetail(
-      id: 1,
+      id: "1",
       barcode: 'asda ',
       catId: 5,
       img: 'assets/images/oil.png',
       name: '11111111111',
       price: [],
-      size: "2dfs",
       productDetailTitle: 'fsdfw',
       productDetail:
           'productDetailproductDetailproductDetailproductDetailproductDetail',
-      nutritionDetail:
-          'productDetailproductDetailproductDetailproductDetailproductDetailproductDetail',
-      nutritionTitle: 'productDetail',
     ),
+    id: '',
   ),
   ProductDetails(
     productDetail: ProductDetail(
-      id: 1,
+      id: '1',
       barcode: 'asda ',
       catId: 5,
       img: 'assets/images/oil.png',
       name: '11111111111',
       price: [],
-      size: "2dfs",
       productDetailTitle: 'fsdfw',
       productDetail:
           'productDetailproductDetailproductDetailproductDetailproductDetail',
-      nutritionDetail:
-          'productDetailproductDetailproductDetailproductDetailproductDetailproductDetail',
-      nutritionTitle: 'productDetail',
     ),
+    id: '',
   ),
   ProductDetails(
     productDetail: ProductDetail(
-      id: 1,
+      id: '1',
       barcode: 'asda ',
       catId: 5,
       img: 'assets/images/oil.png',
       name: '11111111111',
       price: [],
-      size: "2dfs",
       productDetailTitle: 'fsdfw',
       productDetail:
           'productDetailproductDetailproductDetailproductDetailproductDetail',
-      nutritionDetail:
-          'productDetailproductDetailproductDetailproductDetailproductDetailproductDetail',
-      nutritionTitle: 'productDetail',
     ),
+    id: '',
   ),
   ProductDetails(
     productDetail: ProductDetail(
-      id: 1,
+      id: '1',
       barcode: 'asda ',
       catId: 5,
       img: 'assets/images/oil.png',
       name: '11111111111',
       price: [],
-      size: "2dfs",
       productDetailTitle: 'fsdfw',
       productDetail:
           'productDetailproductDetailproductDetailproductDetailproductDetail',
-      nutritionDetail:
-          'productDetailproductDetailproductDetailproductDetailproductDetailproductDetail',
-      nutritionTitle: 'productDetail',
     ),
+    id: '',
   ),
   ProductDetails(
     productDetail: ProductDetail(
-      id: 1,
+      id: '1',
       barcode: 'asda ',
       catId: 5,
       img: 'assets/images/oil.png',
       name: '11111111111',
       price: [],
-      size: "2dfs",
       productDetailTitle: 'fsdfw',
       productDetail:
           'productDetailproductDetailproductDetailproductDetailproductDetail',
-      nutritionDetail:
-          'productDetailproductDetailproductDetailproductDetailproductDetailproductDetail',
-      nutritionTitle: 'productDetail',
     ),
+    id: '',
   ),
   ProductDetails(
     productDetail: ProductDetail(
-      id: 1,
+      id: '1',
       barcode: 'asda ',
       catId: 5,
       img: 'assets/images/oil.png',
       name: '11111111111',
       price: [],
-      size: "2dfs",
       productDetailTitle: 'fsdfw',
       productDetail:
           'productDetailproductDetailproductDetailproductDetailproductDetail',
-      nutritionDetail:
-          'productDetailproductDetailproductDetailproductDetailproductDetailproductDetail',
-      nutritionTitle: 'productDetail',
     ),
+    id: '',
   ),
 ];
 
@@ -124,13 +106,14 @@ List<ProductDetail> newProducts = [
     catId: 0,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'Milk ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://img.freepik.com/premium-vector/red-apple-with-green-leaves-transparent-background-vector-illustration-realistic-vector_545793-565.jpg?w=740',
+    name: 'Алим',
+
+    productDetailTitle: 'Тайлбар',
+    productDetail:
+        'Алим улаан кг А C витаминууд төмөр кальци эрдэс бодисоор баялаг',
+
     price: [
       PriceStores(storeId: 1, price: 1.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -144,13 +127,14 @@ List<ProductDetail> newProducts = [
     catId: 0,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'Sugar ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/5/f/5fe7f496527cc_mandarin.jpg',
+    name: 'Мандарин Морокко кг',
+
+    productDetailTitle: 'Тайлбар',
+    productDetail:
+        'Мандарин Морокко кг Е витамин аскорбины хүчил магни натри агуулдаг',
+
     price: [
       PriceStores(storeId: 1, price: 1.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -164,13 +148,13 @@ List<ProductDetail> newProducts = [
     catId: 0,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'Chips ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/1/1/1138960.jpg',
+    name: 'Мандарин ориг кг',
+
+    productDetailTitle: 'Тайлбар ',
+    productDetail:
+        'Мандарин ориг кг Е витамин аскорбины хүчил магни натрийн агууламжтай',
     price: [
       PriceStores(storeId: 1, price: 4.99),
       PriceStores(storeId: 2, price: 4.09),
@@ -184,13 +168,12 @@ List<ProductDetail> newProducts = [
     catId: 1,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'Fanta ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/i/m/image_34__11.png',
+    name: 'Жүүс OKF Aloe',
+    productDetailTitle: ' Тайлбар',
+    productDetail: 'Жүүс OKF, Aloe vera original 1.5л',
+
     price: [
       PriceStores(storeId: 1, price: 4.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -204,13 +187,12 @@ List<ProductDetail> newProducts = [
     catId: 1,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'Phone ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/6/0/6000200192698__20059.jpg',
+    name: 'Ундаа SPV Coke',
+    productDetailTitle: ' Тайлбар',
+    productDetail: 'Ундаа SPV Coke 330 мл Хийжүүлсэн Үндсэн төрөл USA',
+
     price: [
       PriceStores(storeId: 1, price: 1.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -224,13 +206,12 @@ List<ProductDetail> newProducts = [
     catId: 2,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'Milk ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/j/w/jwb_1l.jpg',
+    name: 'Виски Int JOHNNIE',
+    productDetailTitle: ' Тайлбар',
+    productDetail: 'Виски JW BLACK LABEL 1л хар, 40% Шотланд',
+
     price: [
       PriceStores(storeId: 1, price: 1.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -244,13 +225,13 @@ List<ProductDetail> newProducts = [
     catId: 2,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'Milk3 ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/f/i/file_8_482.jpg',
+    name: 'Гахайн нурууны мах',
+
+    productDetailTitle: ' Тайлбар',
+    productDetail: 'Гахайн нурууны мах 400гр, утсан, Мах импекс',
+
     price: [
       PriceStores(storeId: 1, price: 1.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -264,13 +245,12 @@ List<ProductDetail> newProducts = [
     catId: 3,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'orange ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/s/e/selen.jpg',
+    name: 'Өндөг баяжуулсан 15ш',
+    productDetailTitle: ' Тайлбар',
+    productDetail: 'Өндөг баяжуулсан 15ш Түмэн шувуут',
+
     price: [
       PriceStores(storeId: 1, price: 1.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -284,13 +264,13 @@ List<ProductDetail> newProducts = [
     catId: 4,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'apple ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/s/c/screenshot_2022-03-15_114515.png',
+    name: 'Сүү Миний Монгол ',
+    productDetailTitle: ' Тайлбар',
+    productDetail:
+        'Цэнхэр өнгийн савлагаатай, 3,2%-ийн тослогтой илчлэг сүү нь таны гэр бүлийн кальци болон Д аминдэмийн хэрэгцээг хангана.',
+
     price: [
       PriceStores(storeId: 1, price: 1.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -304,13 +284,12 @@ List<ProductDetail> newProducts = [
     catId: 4,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'Ice cream ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/0/2/02701101.png',
+    name: 'Шоколад Cofler 170гр',
+    productDetailTitle: ' Тайлбар',
+    productDetail: 'Шоколад, Cofler 170гр, самартай 024170',
+
     price: [
       PriceStores(storeId: 1, price: 1.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -324,13 +303,13 @@ List<ProductDetail> newProducts = [
     catId: 4,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'Potato ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/s/c/screenshot_2023-02-11_141810.png',
+    name: 'Гурил Алтан тариа 5кг',
+    productDetailTitle: ' Тайлбар',
+    productDetail:
+        'Гурил Алтан тариа 5кг дээдийн дээд зэрэг аминдэм эрдэс бодисоор баялаг MNG',
+
     price: [
       PriceStores(storeId: 1, price: 1.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -344,13 +323,13 @@ List<ProductDetail> newProducts = [
     catId: 4,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'Tomato ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/_/5/_550_2.png',
+    name: 'Салат Газар шим',
+
+    productDetailTitle: ' Тайлбар',
+    productDetail: 'Салат Өег 600мл 022299',
+
     price: [
       PriceStores(storeId: 1, price: 1.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -364,13 +343,13 @@ List<ProductDetail> newProducts = [
     catId: 4,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'Candy ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/b/r/brazilhar.png',
+    name: 'Кофе Brazil хар',
+
+    productDetailTitle: ' Тайлбар',
+    productDetail: 'Кофе, Brazil, хар, 50ш, 021939',
+
     price: [
       PriceStores(storeId: 1, price: 1.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -384,13 +363,13 @@ List<ProductDetail> newProducts = [
     catId: 5,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'Beeer ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/0/2/02004082_1.png',
+    name: 'Талх Атар 600гр',
+
+    productDetailTitle: ' Тайлбар',
+    productDetail: "Талх, Атар, 600гр, чихэргүй, савласан, Талх чихэр 021639",
+
     price: [
       PriceStores(storeId: 1, price: 1.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -404,13 +383,13 @@ List<ProductDetail> newProducts = [
     catId: 5,
     // id: 0,
     barcode: '123456789',
-    img: 'path/to/image',
-    name: 'Apple',
-    size: '1kg',
-    productDetailTitle: 'Meat ',
-    productDetail: 'Detailed description of the product',
-    nutritionDetail: 'Nutritional information',
-    nutritionTitle: 'Nutrition Title',
+    img:
+        'https://cdn5.nomin.mn/media/catalog/product/cache/eeebe0eac0b4bc7ee54bf30f7830bf7a/3/7/3750575302358412316_800_x_800-removebg-preview.png',
+    name: 'Нарийн боов Цөцгийтэй 450гр',
+
+    productDetailTitle: ' Тайлбар',
+    productDetail: 'Нарийн боов цөцгийтэй 450гр Талх чихэр 021639',
+
     price: [
       PriceStores(storeId: 1, price: 1.99),
       PriceStores(storeId: 2, price: 2.09),
@@ -541,178 +520,109 @@ List<CategoryCard> categoryItems = [
     categoryList: CategoryList(
         catId: 0,
         img: 'assets/images/meat.png',
-        name: 'Meat & Fish',
+        name: 'Мах махан бүтээгдэхүүн',
         catColor: const Color(0xffF7A593)),
   ),
   CategoryCard(
     categoryList: CategoryList(
         catId: 1,
         img: 'assets/images/fruits.png',
-        name: 'Fresh Fruits & Vegetable',
+        name: 'Жимс хүнсний ногоо',
         catColor: const Color(0xff53B175)),
   ),
   CategoryCard(
     categoryList: CategoryList(
         catId: 2,
         img: 'assets/images/oil.png',
-        name: 'Cooking Oil & Ghee',
+        name: 'Сүү сүүн бүтээгдэхүүн',
         catColor: const Color(0xffF8A44C)),
+  ),
+  CategoryCard(
+    categoryList: CategoryList(
+        catId: 3,
+        img: 'assets/images/petcare.png',
+        name: 'Цай кофе',
+        catColor: const Color(0xff8B91A0)),
   ),
   CategoryCard(
     categoryList: CategoryList(
         catId: 4,
         img: 'assets/images/bread.png',
-        name: 'Bakery & Snack',
+        name: 'Талх нарийн боов',
         catColor: const Color(0xffD3B0E0)),
   ),
   CategoryCard(
     categoryList: CategoryList(
         catId: 5,
         img: 'assets/images/eggs.png',
-        name: 'Dairy & Eggs',
+        name: 'Даршилсан нөөшилсөн',
         catColor: const Color(0xffFDE598)),
   ),
   CategoryCard(
     categoryList: CategoryList(
         catId: 6,
         img: 'assets/images/beverages.png',
-        name: 'Beverages',
+        name: 'Шингэн бүтээгдэхүүн',
         catColor: const Color(0xffB7DFF5)),
   ),
   CategoryCard(
     categoryList: CategoryList(
         catId: 7,
         img: 'assets/images/household.jpg',
-        name: 'HouseHold',
+        name: 'Амттан',
         catColor: const Color(0xff8B91A0)),
   ),
   CategoryCard(
     categoryList: CategoryList(
         catId: 8,
         img: 'assets/images/petcare.png',
-        name: 'Pet Care',
+        name: 'Хоол амтлагч',
         catColor: const Color(0xff8B91A0)),
   ),
 ];
 
-List<StoreCard> storeList = [
-  StoreCard(
-    storeCards: StoreDetail(
-        address: 'gjernwmle,f;wopemf',
-        storeId: 0,
-        img: 'assets/stores/emart.jpg',
-        phone: '12345678',
-        name: 'Emart',
-        sectors: [
-          StoreSector(
-              sectorId: 0,
-              sectorLng: LatLng(47.87190394101417, 106.83035418021754),
-              sectorName: 'asdadw')
-        ],
-        price: 5.98),
+List<StoreDetail> storeList = [
+  StoreDetail(
+    address: 'gjernwmle,f;wopemf',
+    storeId: 0,
+    img: 'assets/stores/emart.jpg',
+    phone: '12345678',
+    name: 'Emart',
   ),
-  StoreCard(
-    storeCards: StoreDetail(
-        address: 'gjernwmle,f;wopemf',
-        storeId: 0,
-        img: 'assets/stores/carrefour.png',
-        phone: '12345678',
-        sectors: [
-          StoreSector(
-              sectorId: 0,
-              sectorLng: LatLng(47.87190394101417, 106.83035418021754),
-              sectorName: 'asdadw'),
-          StoreSector(
-              sectorId: 0,
-              sectorLng: LatLng(47.878049862258365, 106.90971141206951),
-              sectorName: 'asdadw'),
-          StoreSector(
-              sectorId: 0,
-              sectorLng: LatLng(47.90774587454703, 106.87870769359223),
-              sectorName: 'asdadw'),
-          StoreSector(
-              sectorId: 0,
-              sectorLng: LatLng(47.93446787053064, 106.81835716669585),
-              sectorName: 'asdadw'),
-          StoreSector(
-              sectorId: 0,
-              sectorLng: LatLng(47.92325599188884, 106.94358201217408),
-              sectorName: 'asdadw'),
-          StoreSector(
-              sectorId: 0,
-              sectorLng: LatLng(47.93845088229213, 106.93620142360592),
-              sectorName: 'asdadw'),
-          StoreSector(
-              sectorId: 0,
-              sectorLng: LatLng(47.937197349038755, 106.91374796000875),
-              sectorName: 'asdadw'),
-          StoreSector(
-              sectorId: 0,
-              sectorLng: LatLng(47.92466034490062, 106.91842576492482),
-              sectorName: 'asdadw'),
-        ],
-        name: 'Carrefour',
-        price: 6.1),
+  StoreDetail(
+    address: 'gjernwmle,f;wopemf',
+    storeId: 0,
+    img: 'assets/stores/carrefour.png',
+    phone: '12345678',
+    name: 'Carrefour',
   ),
-  StoreCard(
-    storeCards: StoreDetail(
-        address: 'gjernwmle,f;wopemf',
-        storeId: 0,
-        img: 'assets/stores/minii.png',
-        phone: '12345678',
-        name: 'Minii suljee',
-        sectors: [
-          StoreSector(
-              sectorId: 0,
-              sectorLng: LatLng(47.87190394101417, 106.83035418021754),
-              sectorName: 'asdadw')
-        ],
-        price: 6.5),
+  StoreDetail(
+    address: 'gjernwmle,f;wopemf',
+    storeId: 0,
+    img: 'assets/stores/minii.png',
+    phone: '12345678',
+    name: 'Minii suljee',
   ),
-  StoreCard(
-    storeCards: StoreDetail(
-        address: 'gjernwmle,f;wopemf',
-        storeId: 0,
-        img: 'assets/stores/mmart.png',
-        phone: '12345678',
-        name: 'M mart',
-        sectors: [
-          StoreSector(
-              sectorId: 0,
-              sectorLng: LatLng(47.87190394101417, 106.83035418021754),
-              sectorName: 'asdadw')
-        ],
-        price: 5.74),
+  StoreDetail(
+    address: 'gjernwmle,f;wopemf',
+    storeId: 0,
+    img: 'assets/stores/mmart.png',
+    phone: '12345678',
+    name: 'M mart',
   ),
-  StoreCard(
-    storeCards: StoreDetail(
-        address: 'gjernwmle,f;wopemf',
-        storeId: 0,
-        img: 'assets/stores/nomin.png',
-        phone: '12345678',
-        name: 'Nomin',
-        sectors: [
-          StoreSector(
-              sectorId: 0,
-              sectorLng: LatLng(47.87190394101417, 106.83035418021754),
-              sectorName: 'asdadw')
-        ],
-        price: 7.1),
+  StoreDetail(
+    address: 'gjernwmle,f;wopemf',
+    storeId: 0,
+    img: 'assets/stores/nomin.png',
+    phone: '12345678',
+    name: 'Nomin',
   ),
-  StoreCard(
-    storeCards: StoreDetail(
-        address: 'gjernwmle,f;wopemf',
-        storeId: 0,
-        img: 'assets/stores/sansar.jpg',
-        phone: '12345678',
-        name: 'Sansar',
-        sectors: [
-          StoreSector(
-              sectorId: 0,
-              sectorLng: LatLng(47.87190394101417, 106.83035418021754),
-              sectorName: 'asdadw')
-        ],
-        price: 6.6),
+  StoreDetail(
+    address: 'gjernwmle,f;wopemf',
+    storeId: 0,
+    img: 'assets/stores/sansar.jpg',
+    phone: '12345678',
+    name: 'Sansar',
   ),
 ];
 
@@ -741,9 +651,10 @@ class GroceryModel {
 
   static List<ProductDetails> getProductDetail() {
     List<ProductDetails> temp = [];
-    for (int i = 0; i < listItems.length; i++) {
-      temp.add(listItems[i]);
-    }
+    // for (int i = 0; i < listItems.length; i++) {
+    //   temp.add(listItems[i]);
+    // }
+    temp.add(listItems[0]);
     return temp;
   }
 
@@ -755,10 +666,10 @@ class GroceryModel {
     return temp;
   }
 
-  static List<StoreSector> getStoreSector(int id) {
-    List<StoreSector> temp = [];
-    for (int i = 0; i < storeList[id].storeCards.sectors.length; i++) {
-      temp.add(storeList[id].storeCards.sectors[i]);
+  static List<StoreDetail> addStore() {
+    List<StoreDetail> temp = [];
+    for (int i = 0; i < storeList.length; i++) {
+      temp.add(storeList[i]);
     }
     return temp;
   }
@@ -787,8 +698,8 @@ class GroceryModel {
     return temp;
   }
 
-  static List<StoreCard> getStoreDetail() {
-    List<StoreCard> temp = [];
+  static List<StoreDetail> getStoreDetail() {
+    List<StoreDetail> temp = [];
     for (int i = 0; i < storeList.length; i++) {
       temp.add(storeList[i]);
     }
@@ -797,7 +708,8 @@ class GroceryModel {
 
   Future<List<ProductDetails>> getAllProducts() async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    QuerySnapshot querySnapshot = await firestore.collection('products').get();
+    QuerySnapshot querySnapshot =
+        await firestore.collection('productDetails').get();
 
     List<ProductDetails> temp = [];
 
@@ -805,18 +717,46 @@ class GroceryModel {
       return ProductDetail.fromDocumentSnapshot(doc);
     }).toList();
 
-    for (var element in products) {
+    for (var doc in querySnapshot.docs) {
+      var element = ProductDetail.fromDocumentSnapshot(doc);
       temp.add(
-        ProductDetails(productDetail: element),
+        ProductDetails(
+          productDetail: element,
+          id: doc.id, // Using the document ID here
+        ),
       );
     }
 
     return temp;
   }
 
+  Future<List<StoreCard>> getStores() async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    // Get the snapshot of the Firestore collection
+    QuerySnapshot snapshot = await firestore.collection('stores').get();
+
+    List<StoreCard> temp = [];
+
+    List<StoreDetail> stores = snapshot.docs.map((doc) {
+      return StoreDetail.fromDocumentSnapshotMap(doc);
+    }).toList();
+
+    for (var doc in snapshot.docs) {
+      var element = StoreDetail.fromDocumentSnapshotMap(doc);
+      temp.add(
+        StoreCard(
+          storeDetail: element,
+          id: doc.id,
+        ),
+      );
+    }
+    // Convert each document into a StoreDetail object
+    return temp;
+  }
+
   Future<ProductDetail> getProductDetail1(String documentId) async {
     DocumentSnapshot doc = await FirebaseFirestore.instance
-        .collection('products')
+        .collection('productDetails')
         .doc(documentId)
         .get();
 
@@ -825,6 +765,21 @@ class GroceryModel {
     } else {
       throw Exception('Product not found');
     }
+  }
+
+  static PriceStores getCheapestPrice(List<PriceStores> prices) {
+    if (prices.isEmpty) {
+      throw Exception('Price list is empty');
+    }
+
+    PriceStores cheapest = prices[0];
+    for (PriceStores priceStore in prices) {
+      if (priceStore.price < cheapest.price) {
+        cheapest = priceStore;
+      }
+    }
+
+    return cheapest;
   }
 
   Future<UserModel> getUserData(String userId) async {

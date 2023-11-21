@@ -1,16 +1,38 @@
 // ignore_for_file: empty_constructor_bodies
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_store/model/product_detail.dart';
 import 'package:grocery_store/util/constants.dart';
 import 'package:sizer/sizer.dart';
 
+import '../model/store_price.dart';
 import '../pages/detail_screen.dart';
+import '../services/grocery.dart';
 
 class ProductDetails extends StatelessWidget {
+  final String id;
   final ProductDetail productDetail;
 
-  const ProductDetails({super.key, required this.productDetail});
+  const ProductDetails(
+      {super.key, required this.productDetail, required this.id});
+
+  Future<void> navigateToDetailScreen(BuildContext context) async {
+    try {
+      // Fetch the document from Firestore using the document ID
+      DocumentSnapshot docSnapshot = await FirebaseFirestore.instance
+          .collection('productDetails')
+          .doc(id)
+          .get();
+
+      // Create a ProductDetail object from the snapshot
+      ProductDetail productDetail =
+          ProductDetail.fromDocumentSnapshot(docSnapshot);
+    } catch (e) {
+      // Handle errors or non-existent documents
+      print('Error fetching product details: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +41,11 @@ class ProductDetails extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => DetailScreen(
-                    productId: productDetail.id!,
-                  )),
+            builder: (context) => DetailScreen(
+              productDetail: productDetail,
+            ),
+          ),
         );
-        // await navi.newScreen(
-        //     newScreen: () {
-        //       // DetailScreen(
-        //       //   productId: ProductDetail.id,
-        //       // );
-        //     },
-        //     context: context);
-        print(productDetail.id);
       },
       child: Container(
         padding: EdgeInsets.all(1.5.h),
@@ -48,7 +63,7 @@ class ProductDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
+            Image.network(
               productDetail.img,
               height: 11.h,
               width: double.infinity,
@@ -60,10 +75,6 @@ class ProductDetails extends StatelessWidget {
               productDetail.name,
               style: kProductDetailsNameTextStyle,
             ),
-            Text(
-              productDetail.size,
-              style: kRegular12,
-            ),
             SizedBox(
               height: 1.h,
             ),
@@ -71,7 +82,7 @@ class ProductDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "\$${productDetail.price}",
+                  "\$${GroceryModel.getCheapestPrice(productDetail.price).price.toStringAsFixed(2)}",
                   style: kMedium12,
                 ),
                 GestureDetector(

@@ -16,7 +16,7 @@ class PriceCompareScreen extends StatefulWidget {
 
 class _PriceCompareScreenState extends State<PriceCompareScreen> {
   @override
-  final List<StoreCard> _storeDetail = GroceryModel.getStoreDetail();
+  // final List<StoreCard> _storeDetail = GroceryModel.getStoreDetail();
 
   @override
   Widget build(BuildContext context) {
@@ -28,22 +28,22 @@ class _PriceCompareScreenState extends State<PriceCompareScreen> {
           leadIcon: Icon(Icons.arrow_back),
         ),
         body: Padding(
-          padding: EdgeInsets.fromLTRB(5.w, 0, 5.w, 5.w),
-          child: SingleChildScrollView(
-            child: (_storeDetail == null)
-                ? Container(
-                    height: 25.h,
-                    decoration: const BoxDecoration(color: kPrimaryColor),
-                  )
-                : (_storeDetail.isEmpty)
-                    ? const Center(
-                        child: Text("k404Text"),
-                      )
-                    : StoreItemContainer(
-                        storeCard: _storeDetail,
-                      ),
-          ),
-        ),
+            padding: EdgeInsets.fromLTRB(5.w, 0, 5.w, 5.w), child: Container()
+            // SingleChildScrollView(
+            //   child: (_storeDetail == null)
+            //       ? Container(
+            //           height: 25.h,
+            //           decoration: const BoxDecoration(color: kPrimaryColor),
+            //         )
+            //       : (_storeDetail.isEmpty)
+            //           ? const Center(
+            //               child: Text("k404Text"),
+            //             )
+            //           : StoreItemContainer(
+            //               storeCard: _storeDetail,
+            //             ),
+            // ),
+            ),
       ),
     );
   }

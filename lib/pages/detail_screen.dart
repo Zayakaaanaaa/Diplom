@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_store/model/product_detail.dart';
 import 'package:grocery_store/services/grocery.dart';
 import 'package:grocery_store/util/constants.dart';
 import 'package:grocery_store/widgets/custom_counter.dart';
@@ -9,32 +10,32 @@ import 'package:sizer/sizer.dart';
 import '../widgets/custom_app_bar.dart';
 
 class DetailScreen extends StatefulWidget {
-  final int productId;
+  final ProductDetail productDetail;
 
-  const DetailScreen({super.key, required this.productId});
+  const DetailScreen({super.key, required this.productDetail});
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
 
-  // Future<ProductDetails> getProductDetail() async {
+  // Future<widget.ProductDetailetProductDetail() async {
   //   GroceryModel videoModel = GroceryModel();
-  //   ProductDetails temp = await videoModel.getProductDetail(id: productId);
+  //   widget.ProductDetailmp = await videoModel.getProductDetail(id: productId);
   //   return temp;
   // }
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  List<ProductDetails> productDetails = GroceryModel.getProductDetail();
+  // List<widget.ProductDetailidget.productDetailGroceryModel.getProductDetail();
 
   // @override
   // void initState() {
   //   super.initState();
   //   () async {
-  //     ProductDetails temp = await widget.getProductDetail();
+  //     widget.ProductDetailmp = await widget.getProductDetail();
   //     print('dasdasd');
 
   //     setState(() {
-  //       productDetails = temp;
+  //       widget.productDetailtemp;
   //     });
   //   };
   // }
@@ -48,12 +49,9 @@ class _DetailScreenState extends State<DetailScreen> {
         actionIcon: Icon(Icons.ios_share_rounded),
         bgColor: kTextFieldColor,
       ),
-      body: (productDetails[0].productDetail == null)
+      body: (widget.productDetail == null)
           ? GestureDetector(
-              onTap: () {
-                print(widget.productId);
-                print(productDetails);
-              },
+              onTap: () {},
               child: Column(
                 children: [
                   Text(kBottomNavigationFifthText),
@@ -73,8 +71,8 @@ class _DetailScreenState extends State<DetailScreen> {
                         bottom: Radius.circular(5.h),
                       ),
                     ),
-                    child: Image.asset(
-                      productDetails[0].productDetail.img,
+                    child: Image.network(
+                      widget.productDetail.img,
                     ),
                   ),
                   Container(
@@ -88,13 +86,13 @@ class _DetailScreenState extends State<DetailScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  productDetails[0].productDetail.name,
+                                  widget.productDetail.name,
                                   style: kSemibold18,
                                 ),
-                                Text(
-                                  productDetails[0].productDetail.size,
-                                  style: kRegular12,
-                                ),
+                                // Text(
+                                //   widget.productDetail.productDetail.size,
+                                //   style: kRegular12,
+                                // ),
                               ],
                             ),
                             Container(
@@ -108,36 +106,25 @@ class _DetailScreenState extends State<DetailScreen> {
                           ],
                         ),
                         SizedBox(height: 3.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const CustomCounter(
-                              buttonBorder: true,
-                              counterBorder: false,
-                              quantity: 5,
-                            ),
-                            Text(
-                              '\$${productDetails[0].productDetail.price}',
-                              style: kSemibold18,
-                            ),
-                          ],
+                        const CustomCounter(
+                          buttonBorder: true,
+                          counterBorder: false,
+                          quantity: 5,
                         ),
                         SizedBox(
                           height: 3.h,
                         ),
                         ExpandableWidget(
-                          title: productDetails[0]
-                              .productDetail
-                              .productDetailTitle!,
-                          description:
-                              productDetails[0].productDetail.productDetail!,
+                          title: widget.productDetail.productDetailTitle!,
+                          description: widget.productDetail.productDetail!,
                         ),
-                        ExpandableWidget(
-                          title:
-                              productDetails[0].productDetail.nutritionTitle!,
-                          description:
-                              productDetails[0].productDetail.nutritionDetail!,
-                        ),
+                        
+                        // ExpandableWidget(
+                        //   title:
+                        //       widget.productDetail.productDetail.nutritionTitle!,
+                        //   description:
+                        //       widget.productDetail.productDetail.nutritionDetail!,
+                        // ),
                         CustomTextButton(
                           text: 'text',
                           onPressed: () {
