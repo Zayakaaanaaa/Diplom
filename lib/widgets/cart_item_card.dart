@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_store/model/cart_list.dart';
+import 'package:grocery_store/model/product_detail.dart';
+import 'package:grocery_store/services/grocery.dart';
 import 'package:grocery_store/util/constants.dart';
+import 'package:grocery_store/util/user.dart';
 import 'package:grocery_store/widgets/custom_counter.dart';
 import 'package:sizer/sizer.dart';
 
@@ -14,6 +17,7 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String? userId = UserPreferences.getUser();
     return Container(
       height: 15.h,
       width: double.infinity,
@@ -24,55 +28,80 @@ class CartItem extends StatelessWidget {
         color: kScaffoldColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey
-                .withOpacity(0.2), // Shadow color with some transparency
-            spreadRadius: 1, // Extend the shadow to all sides by 1 unit
-            blurRadius: 5, // Blur radius for the shadow
-            offset: const Offset(0, 3), // Position of the shadow
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
           ),
         ],
-        // border: Border(
-        //   top: BorderSide(color: kBorderColor, width: 1.sp),
-        // ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Image.asset(
-            cartItem.img,
-            height: 8.h,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                cartItem.name,
-                style: kProductDetailsNameTextStyle,
-              ),
-              Text(
-                cartItem.subName,
-                style: kRegular12,
-              ),
-              CustomCounter(
-                counterBorder: true,
-                buttonBorder: false,
-                quantity: cartItem.quantity,
-              ),
-            ],
-          ),
-          Column(
+      child: FutureBuilder<ProductDetail>(
+        future: groceryModel.getProductDetail1(cartItem.product),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          }
+          if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          }
+          if (!snapshot.hasData) {
+            return Text('No data available');
+          }
+          final productDetail = snapshot.data!;
+          return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Icon(Icons.close_rounded),
-              Text(
-                '\$${cartItem.price}',
-                style: kMedium12,
+              Image.network(
+                productDetail.img,
+                height: 8.h,
               ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    productDetail.name,
+                    style: kProductDetailsNameTextStyle,
+                  ),
+                  Text(
+                    "'",
+                    style: kRegular12,
+                  ),
+                  CustomCounter(
+                    quantity: cartItem.quantity,
+                    counterBorder: true,
+                    buttonBorder: false,
+                    onCounterChanged: (newQuantity) async {
+                      try {
+                        cartItem.quantity = newQuantity;
+                        await groceryModel.updateCartItemQuantity(
+                            userId, cartItem.prodcutDocId, newQuantity);
+                      } catch (e) {
+                        print(e);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text('Error updating quantity: $e')),
+                        );
+                      }
+                    },
+                    // other properties...
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const Icon(Icons.close_rounded),
+                  Text(
+                    "${GroceryModel.getCheapestPrice(productDetail.price).price.toStringAsFixed(2)}",
+                    style: kMedium12,
+                  ),
+                ],
+              )
             ],
-          )
-        ],
+          );
+        },
       ),
     );
   }

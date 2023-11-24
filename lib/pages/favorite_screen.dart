@@ -23,7 +23,7 @@ class FavoriteScreen extends StatefulWidget {
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
   int bottomBarIndex = 3;
-  final List<FavoriteItem> _favoriteItems = GroceryModel.getFavoriteItems();
+  // final List<FavoriteItem> _favoriteItems = GroceryModel.getFavoriteItems();
 
   @override
   Widget build(BuildContext context) {
@@ -41,17 +41,17 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  (_favoriteItems == null)
-                      ? Container(
-                          height: 25.h,
-                          decoration: const BoxDecoration(color: kPrimaryColor))
-                      : (_favoriteItems.isEmpty)
-                          ? const Center(
-                              child: Text("k404Text"),
-                            )
-                          : FavoriteItemContainer(
-                              favoriteItems: _favoriteItems,
-                            ),
+                  // (_favoriteItems == null)
+                  //     ? Container(
+                  //         height: 25.h,
+                  //         decoration: const BoxDecoration(color: kPrimaryColor))
+                  //     : (_favoriteItems.isEmpty)
+                  //         ? const Center(
+                  //             child: Text("k404Text"),
+                  //           )
+                  //         : FavoriteItemContainer(
+                  //             favoriteItems: _favoriteItems,
+                  //           ),
                   CustomTextButton(
                     text: kFavoriteScreenButtonText,
                     onPressed: () {

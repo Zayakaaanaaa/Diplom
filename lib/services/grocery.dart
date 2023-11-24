@@ -5,11 +5,13 @@ import 'package:grocery_store/model/cart_list.dart';
 import 'package:grocery_store/model/product_detail.dart';
 import 'package:grocery_store/model/store.dart';
 import 'package:grocery_store/model/store_sector.dart';
+import 'package:grocery_store/util/user.dart';
 import 'package:grocery_store/widgets/category_card.dart';
 import 'package:grocery_store/widgets/product_card.dart';
 import '../model/category.dart';
 import '../model/store_price.dart';
 import '../model/user.dart';
+import '../util/constants.dart';
 import '../widgets/cart_item_card.dart';
 import '../widgets/favorite_card.dart';
 import '../widgets/store_card.dart';
@@ -401,119 +403,311 @@ List<ProductDetail> newProducts = [
   ),
 ];
 
-List<FavoriteItem> favoriteItems = [
-  FavoriteItem(
-    favoriteItems: CartProduct(
-        cartId: 1,
-        img: 'assets/images/meat.png',
-        name: 'Meat',
-        subName: '1kg,Price',
-        price: 4.99,
-        quantity: 5),
-  ),
-  FavoriteItem(
-    favoriteItems: CartProduct(
-        cartId: 1,
-        img: 'assets/images/meat.png',
-        name: 'Meat',
-        subName: '1kg,Price',
-        price: 4.99,
-        quantity: 5),
-  ),
-  FavoriteItem(
-    favoriteItems: CartProduct(
-        cartId: 1,
-        img: 'assets/images/meat.png',
-        name: 'Meat',
-        subName: '1kg,Price',
-        price: 4.99,
-        quantity: 5),
-  ),
-  FavoriteItem(
-    favoriteItems: CartProduct(
-        cartId: 1,
-        img: 'assets/images/meat.png',
-        name: 'Meat',
-        subName: '1kg,Price',
-        price: 4.99,
-        quantity: 5),
-  ),
-  FavoriteItem(
-    favoriteItems: CartProduct(
-        cartId: 1,
-        img: 'assets/images/meat.png',
-        name: 'Meat',
-        subName: '1kg,Price',
-        price: 4.99,
-        quantity: 5),
-  ),
-  FavoriteItem(
-    favoriteItems: CartProduct(
-        cartId: 1,
-        img: 'assets/images/meat.png',
-        name: 'Meat',
-        subName: '1kg,Price',
-        price: 4.99,
-        quantity: 5),
-  )
-];
+// List<FavoriteItem> favoriteItems = [
+//   FavoriteItem(
+//     favoriteItems: CartProduct(
+//         product: ProductDetail(
+//           catId: 0,
+//           // id: 0,
+//           barcode: '123456789',
+//           img:
+//               'https://img.freepik.com/premium-vector/red-apple-with-green-leaves-transparent-background-vector-illustration-realistic-vector_545793-565.jpg?w=740',
+//           name: 'Алим',
 
-List<CartItem> cartItems = [
-  CartItem(
-    cartItem: CartProduct(
-        cartId: 1,
-        img: 'assets/images/meat.png',
-        name: 'Meat',
-        subName: '1kg,Price',
-        price: 4.99,
-        quantity: 5),
-  ),
-  CartItem(
-    cartItem: CartProduct(
-        cartId: 1,
-        img: 'assets/images/meat.png',
-        name: 'Meat',
-        subName: '1kg,Price',
-        price: 4.99,
-        quantity: 5),
-  ),
-  CartItem(
-    cartItem: CartProduct(
-        cartId: 1,
-        img: 'assets/images/meat.png',
-        name: 'Meat',
-        subName: '1kg,Price',
-        price: 4.99,
-        quantity: 5),
-  ),
-  CartItem(
-    cartItem: CartProduct(
-        cartId: 1,
-        img: 'assets/images/meat.png',
-        name: 'Meat',
-        subName: '1kg,Price',
-        price: 4.99,
-        quantity: 5),
-  ),
-  CartItem(
-    cartItem: CartProduct(
-        cartId: 1,
-        img: 'assets/images/meat.png',
-        name: 'Meat',
-        subName: '1kg,Price',
-        price: 4.99,
-        quantity: 5),
-  ),
-  CartItem(
-    cartItem: CartProduct(
-        cartId: 1,
-        img: 'assets/images/meat.png',
-        name: 'Meat',
-        subName: '1kg,Price',
-        price: 4.99,
-        quantity: 5),
-  )
-];
+//           productDetailTitle: 'Тайлбар',
+//           productDetail:
+//               'Алим улаан кг А C витаминууд төмөр кальци эрдэс бодисоор баялаг',
+
+//           price: [
+//             PriceStores(storeId: 1, price: 1.99),
+//             PriceStores(storeId: 2, price: 2.09),
+//             PriceStores(storeId: 3, price: 2.00),
+//             PriceStores(storeId: 4, price: 2.50),
+//             PriceStores(storeId: 5, price: 2.10),
+//             PriceStores(storeId: 6, price: 1.70),
+//           ],
+//         ),
+//         quantity: 5),
+//   ),
+//   FavoriteItem(
+//     favoriteItems: CartProduct(
+//         product: ProductDetail(
+//           catId: 0,
+//           // id: 0,
+//           barcode: '123456789',
+//           img:
+//               'https://img.freepik.com/premium-vector/red-apple-with-green-leaves-transparent-background-vector-illustration-realistic-vector_545793-565.jpg?w=740',
+//           name: 'Алим',
+
+//           productDetailTitle: 'Тайлбар',
+//           productDetail:
+//               'Алим улаан кг А C витаминууд төмөр кальци эрдэс бодисоор баялаг',
+
+//           price: [
+//             PriceStores(storeId: 1, price: 1.99),
+//             PriceStores(storeId: 2, price: 2.09),
+//             PriceStores(storeId: 3, price: 2.00),
+//             PriceStores(storeId: 4, price: 2.50),
+//             PriceStores(storeId: 5, price: 2.10),
+//             PriceStores(storeId: 6, price: 1.70),
+//           ],
+//         ),
+//         quantity: 5),
+//   ),
+//   FavoriteItem(
+//     favoriteItems: CartProduct(
+//         product: ProductDetail(
+//           catId: 0,
+//           // id: 0,
+//           barcode: '123456789',
+//           img:
+//               'https://img.freepik.com/premium-vector/red-apple-with-green-leaves-transparent-background-vector-illustration-realistic-vector_545793-565.jpg?w=740',
+//           name: 'Алим',
+
+//           productDetailTitle: 'Тайлбар',
+//           productDetail:
+//               'Алим улаан кг А C витаминууд төмөр кальци эрдэс бодисоор баялаг',
+
+//           price: [
+//             PriceStores(storeId: 1, price: 1.99),
+//             PriceStores(storeId: 2, price: 2.09),
+//             PriceStores(storeId: 3, price: 2.00),
+//             PriceStores(storeId: 4, price: 2.50),
+//             PriceStores(storeId: 5, price: 2.10),
+//             PriceStores(storeId: 6, price: 1.70),
+//           ],
+//         ),
+//         quantity: 5),
+//   ),
+//   FavoriteItem(
+//     favoriteItems: CartProduct(
+//         product: ProductDetail(
+//           catId: 0,
+//           // id: 0,
+//           barcode: '123456789',
+//           img:
+//               'https://img.freepik.com/premium-vector/red-apple-with-green-leaves-transparent-background-vector-illustration-realistic-vector_545793-565.jpg?w=740',
+//           name: 'Алим',
+
+//           productDetailTitle: 'Тайлбар',
+//           productDetail:
+//               'Алим улаан кг А C витаминууд төмөр кальци эрдэс бодисоор баялаг',
+
+//           price: [
+//             PriceStores(storeId: 1, price: 1.99),
+//             PriceStores(storeId: 2, price: 2.09),
+//             PriceStores(storeId: 3, price: 2.00),
+//             PriceStores(storeId: 4, price: 2.50),
+//             PriceStores(storeId: 5, price: 2.10),
+//             PriceStores(storeId: 6, price: 1.70),
+//           ],
+//         ),
+//         quantity: 5),
+//   ),
+//   FavoriteItem(
+//     favoriteItems: CartProduct(
+//         product: ProductDetail(
+//           catId: 0,
+//           // id: 0,
+//           barcode: '123456789',
+//           img:
+//               'https://img.freepik.com/premium-vector/red-apple-with-green-leaves-transparent-background-vector-illustration-realistic-vector_545793-565.jpg?w=740',
+//           name: 'Алим',
+
+//           productDetailTitle: 'Тайлбар',
+//           productDetail:
+//               'Алим улаан кг А C витаминууд төмөр кальци эрдэс бодисоор баялаг',
+
+//           price: [
+//             PriceStores(storeId: 1, price: 1.99),
+//             PriceStores(storeId: 2, price: 2.09),
+//             PriceStores(storeId: 3, price: 2.00),
+//             PriceStores(storeId: 4, price: 2.50),
+//             PriceStores(storeId: 5, price: 2.10),
+//             PriceStores(storeId: 6, price: 1.70),
+//           ],
+//         ),
+//         quantity: 5),
+//   ),
+//   FavoriteItem(
+//     favoriteItems: CartProduct(
+//         product: ProductDetail(
+//           catId: 0,
+//           // id: 0,
+//           barcode: '123456789',
+//           img:
+//               'https://img.freepik.com/premium-vector/red-apple-with-green-leaves-transparent-background-vector-illustration-realistic-vector_545793-565.jpg?w=740',
+//           name: 'Алим',
+
+//           productDetailTitle: 'Тайлбар',
+//           productDetail:
+//               'Алим улаан кг А C витаминууд төмөр кальци эрдэс бодисоор баялаг',
+
+//           price: [
+//             PriceStores(storeId: 1, price: 1.99),
+//             PriceStores(storeId: 2, price: 2.09),
+//             PriceStores(storeId: 3, price: 2.00),
+//             PriceStores(storeId: 4, price: 2.50),
+//             PriceStores(storeId: 5, price: 2.10),
+//             PriceStores(storeId: 6, price: 1.70),
+//           ],
+//         ),
+//         quantity: 5),
+//   )
+// ];
+
+// List<CartItem> cartItems = [
+//   CartItem(
+//     cartItem: CartProduct(
+//         product: ProductDetail(
+//           catId: 0,
+//           // id: 0,
+//           barcode: '123456789',
+//           img:
+//               'https://img.freepik.com/premium-vector/red-apple-with-green-leaves-transparent-background-vector-illustration-realistic-vector_545793-565.jpg?w=740',
+//           name: 'Алим',
+
+//           productDetailTitle: 'Тайлбар',
+//           productDetail:
+//               'Алим улаан кг А C витаминууд төмөр кальци эрдэс бодисоор баялаг',
+
+//           price: [
+//             PriceStores(storeId: 1, price: 1.99),
+//             PriceStores(storeId: 2, price: 2.09),
+//             PriceStores(storeId: 3, price: 2.00),
+//             PriceStores(storeId: 4, price: 2.50),
+//             PriceStores(storeId: 5, price: 2.10),
+//             PriceStores(storeId: 6, price: 1.70),
+//           ],
+//         ),
+//         quantity: 5),
+//   ),
+//   CartItem(
+//     cartItem: CartProduct(
+//         product: ProductDetail(
+//           catId: 0,
+//           // id: 0,
+//           barcode: '123456789',
+//           img:
+//               'https://img.freepik.com/premium-vector/red-apple-with-green-leaves-transparent-background-vector-illustration-realistic-vector_545793-565.jpg?w=740',
+//           name: 'Алим',
+
+//           productDetailTitle: 'Тайлбар',
+//           productDetail:
+//               'Алим улаан кг А C витаминууд төмөр кальци эрдэс бодисоор баялаг',
+
+//           price: [
+//             PriceStores(storeId: 1, price: 1.99),
+//             PriceStores(storeId: 2, price: 2.09),
+//             PriceStores(storeId: 3, price: 2.00),
+//             PriceStores(storeId: 4, price: 2.50),
+//             PriceStores(storeId: 5, price: 2.10),
+//             PriceStores(storeId: 6, price: 1.70),
+//           ],
+//         ),
+//         quantity: 5),
+//   ),
+//   CartItem(
+//     cartItem: CartProduct(
+//         product: ProductDetail(
+//           catId: 0,
+//           // id: 0,
+//           barcode: '123456789',
+//           img:
+//               'https://img.freepik.com/premium-vector/red-apple-with-green-leaves-transparent-background-vector-illustration-realistic-vector_545793-565.jpg?w=740',
+//           name: 'Алим',
+
+//           productDetailTitle: 'Тайлбар',
+//           productDetail:
+//               'Алим улаан кг А C витаминууд төмөр кальци эрдэс бодисоор баялаг',
+
+//           price: [
+//             PriceStores(storeId: 1, price: 1.99),
+//             PriceStores(storeId: 2, price: 2.09),
+//             PriceStores(storeId: 3, price: 2.00),
+//             PriceStores(storeId: 4, price: 2.50),
+//             PriceStores(storeId: 5, price: 2.10),
+//             PriceStores(storeId: 6, price: 1.70),
+//           ],
+//         ),
+//         quantity: 5),
+//   ),
+//   CartItem(
+//     cartItem: CartProduct(
+//         product: ProductDetail(
+//           catId: 0,
+//           // id: 0,
+//           barcode: '123456789',
+//           img:
+//               'https://img.freepik.com/premium-vector/red-apple-with-green-leaves-transparent-background-vector-illustration-realistic-vector_545793-565.jpg?w=740',
+//           name: 'Алим',
+
+//           productDetailTitle: 'Тайлбар',
+//           productDetail:
+//               'Алим улаан кг А C витаминууд төмөр кальци эрдэс бодисоор баялаг',
+
+//           price: [
+//             PriceStores(storeId: 1, price: 1.99),
+//             PriceStores(storeId: 2, price: 2.09),
+//             PriceStores(storeId: 3, price: 2.00),
+//             PriceStores(storeId: 4, price: 2.50),
+//             PriceStores(storeId: 5, price: 2.10),
+//             PriceStores(storeId: 6, price: 1.70),
+//           ],
+//         ),
+//         quantity: 5),
+//   ),
+//   CartItem(
+//     cartItem: CartProduct(
+//         product: ProductDetail(
+//           catId: 0,
+//           // id: 0,
+//           barcode: '123456789',
+//           img:
+//               'https://img.freepik.com/premium-vector/red-apple-with-green-leaves-transparent-background-vector-illustration-realistic-vector_545793-565.jpg?w=740',
+//           name: 'Алим',
+
+//           productDetailTitle: 'Тайлбар',
+//           productDetail:
+//               'Алим улаан кг А C витаминууд төмөр кальци эрдэс бодисоор баялаг',
+
+//           price: [
+//             PriceStores(storeId: 1, price: 1.99),
+//             PriceStores(storeId: 2, price: 2.09),
+//             PriceStores(storeId: 3, price: 2.00),
+//             PriceStores(storeId: 4, price: 2.50),
+//             PriceStores(storeId: 5, price: 2.10),
+//             PriceStores(storeId: 6, price: 1.70),
+//           ],
+//         ),
+//         quantity: 5),
+//   ),
+//   CartItem(
+//     cartItem: CartProduct(
+//         product: ProductDetail(
+//           catId: 0,
+//           // id: 0,
+//           barcode: '123456789',
+//           img:
+//               'https://img.freepik.com/premium-vector/red-apple-with-green-leaves-transparent-background-vector-illustration-realistic-vector_545793-565.jpg?w=740',
+//           name: 'Алим',
+
+//           productDetailTitle: 'Тайлбар',
+//           productDetail:
+//               'Алим улаан кг А C витаминууд төмөр кальци эрдэс бодисоор баялаг',
+
+//           price: [
+//             PriceStores(storeId: 1, price: 1.99),
+//             PriceStores(storeId: 2, price: 2.09),
+//             PriceStores(storeId: 3, price: 2.00),
+//             PriceStores(storeId: 4, price: 2.50),
+//             PriceStores(storeId: 5, price: 2.10),
+//             PriceStores(storeId: 6, price: 1.70),
+//           ],
+//         ),
+//         quantity: 5),
+//   )
+// ];
 
 List<CategoryCard> categoryItems = [
   CategoryCard(
@@ -627,6 +821,7 @@ List<StoreDetail> storeList = [
 ];
 
 class GroceryModel {
+  String? userId = UserPreferences.getUser();
   // Future<ProductDetails> getProductDetail({
   //   required int id,
   // }) async {
@@ -682,21 +877,21 @@ class GroceryModel {
     return temp;
   }
 
-  static List<CartItem> getCartItems() {
-    List<CartItem> temp = [];
-    for (int i = 0; i < cartItems.length; i++) {
-      temp.add(cartItems[i]);
-    }
-    return temp;
-  }
+  // static List<CartItem> getCartItems() {
+  //   List<CartItem> temp = [];
+  //   for (int i = 0; i < cartItems.length; i++) {
+  //     temp.add(cartItems[i]);
+  //   }
+  //   return temp;
+  // }
 
-  static List<FavoriteItem> getFavoriteItems() {
-    List<FavoriteItem> temp = [];
-    for (int i = 0; i < favoriteItems.length; i++) {
-      temp.add(favoriteItems[i]);
-    }
-    return temp;
-  }
+  // static List<FavoriteItem> getFavoriteItems() {
+  //   List<FavoriteItem> temp = [];
+  //   for (int i = 0; i < favoriteItems.length; i++) {
+  //     temp.add(favoriteItems[i]);
+  //   }
+  //   return temp;
+  // }
 
   static List<StoreDetail> getStoreDetail() {
     List<StoreDetail> temp = [];
@@ -707,7 +902,6 @@ class GroceryModel {
   }
 
   Future<List<ProductDetails>> getAllProducts() async {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
     QuerySnapshot querySnapshot =
         await firestore.collection('productDetails').get();
 
@@ -731,7 +925,6 @@ class GroceryModel {
   }
 
   Future<List<StoreCard>> getStores() async {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
     // Get the snapshot of the Firestore collection
     QuerySnapshot snapshot = await firestore.collection('stores').get();
 
@@ -754,6 +947,107 @@ class GroceryModel {
     return temp;
   }
 
+  // Future<List<CartProduct>> getCartProducts(String id) async {
+  //   List<CartProduct> temp = [];
+  //   String? prodcutId;
+
+  //   CollectionReference cartProductsCollection =
+  //       FirebaseFirestore.instance.collection('cartProducts');
+
+  //   QuerySnapshot querySnapshot =
+  //       await cartProductsCollection.doc(id).collection('product').get();
+
+  //   if (querySnapshot.docs.isNotEmpty) {
+  //     for (QueryDocumentSnapshot doc in querySnapshot.docs) {
+  //       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+  //       prodcutId = data['id'];
+
+  //       DocumentSnapshot productCard =
+  //           await firestore.collection('productDetails').doc(prodcutId).get();
+
+  // CartProduct product = CartProduct(
+  //   product: ProductDetail.fromDocumentSnapshot(productCard),
+  //   quantity: data['quantity'],
+  // );
+  // print(product);
+  // temp.add(product);
+  //     }
+  //   } else {
+  //     print('No documents found for user ');
+  //   }
+  //   print(prodcutId);
+  //   return temp;
+  // }
+
+  // Future<List<String>> getDocIdsFromSubcollection() async {
+  //   QuerySnapshot subcollectionSnapshot = await firestore
+  //       .collection('cardProducts')
+  //       .doc(userId)
+  //       .collection('product')
+  //       .get();
+
+  //   List<String> docIds =
+  //       subcollectionSnapshot.docs.map((doc) => doc.id).toList();
+
+  //   print(docIds);
+  //   return docIds;
+  // }
+
+  Future<List<CartProduct>> getSubcollectionDocumentData(String userID) async {
+    List<CartProduct> temp = [];
+
+    try {
+      CollectionReference subcollectionRef = FirebaseFirestore.instance
+          .collection('cartProducts')
+          .doc(userID)
+          .collection('product');
+
+      QuerySnapshot subcollectionSnapshot = await subcollectionRef.get();
+
+      subcollectionSnapshot.docs.forEach((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+        CartProduct product = CartProduct(
+          prodcutDocId: doc.id,
+          product: data['product'],
+          quantity: data['quantity'],
+        );
+        print(doc.id);
+        temp.add(product);
+      });
+    } catch (e) {
+      print('Error getting subcollection document data: $e');
+    }
+    print(temp);
+    return temp;
+  }
+
+  Future<void> updateCartItemQuantity(
+    String? userId,
+    String cartItemId,
+    int newQuantity,
+  ) async {
+    try {
+      if (userId != null) {
+        print('User ID is empty.');
+        await FirebaseFirestore.instance
+            .collection('cartProducts') // Your cart items collection path
+            .doc(userId)
+            .collection('product')
+            .doc(cartItemId)
+            .update(
+          {'quantity': newQuantity},
+        );
+      }
+
+      // print(userId);
+      // print(cartItemId);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<ProductDetail> getProductDetail1(String documentId) async {
     DocumentSnapshot doc = await FirebaseFirestore.instance
         .collection('productDetails')
@@ -764,6 +1058,24 @@ class GroceryModel {
       return ProductDetail.fromDocumentSnapshot(doc);
     } else {
       throw Exception('Product not found');
+    }
+  }
+
+  Future<void> addProductToCart(
+      String userID, String productID, int quantity) async {
+    CollectionReference productsCollection =
+        firestore.collection('cartProducts').doc(userID).collection('product');
+
+    QuerySnapshot existingProducts =
+        await productsCollection.where('product', isEqualTo: productID).get();
+
+    if (existingProducts.docs.isEmpty) {
+      await productsCollection.add({
+        'quantity': quantity,
+        'product': productID,
+      });
+    } else {
+      print('Product already in the cart.');
     }
   }
 

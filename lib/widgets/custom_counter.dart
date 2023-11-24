@@ -4,15 +4,18 @@ import 'package:grocery_store/util/constants.dart';
 import 'package:sizer/sizer.dart';
 
 class CustomCounter extends StatefulWidget {
+  final CounterChangedCallback onCounterChanged;
   final bool counterBorder;
   final bool buttonBorder;
   final int? quantity;
 
-  const CustomCounter(
-      {super.key,
-      this.quantity,
-      required this.buttonBorder,
-      required this.counterBorder});
+  const CustomCounter({
+    super.key,
+    required this.quantity,
+    required this.buttonBorder,
+    required this.counterBorder,
+    required this.onCounterChanged,
+  });
 
   @override
   State<CustomCounter> createState() => _CustomCounterState();
@@ -32,6 +35,7 @@ class _CustomCounterState extends State<CustomCounter> {
   void _incrementCounter() {
     setState(() {
       _counter++;
+      widget.onCounterChanged(_counter);
     });
   }
 
@@ -39,6 +43,7 @@ class _CustomCounterState extends State<CustomCounter> {
     setState(() {
       if (_counter > 0) {
         _counter--;
+        widget.onCounterChanged(_counter);
       }
     });
   }

@@ -12,6 +12,7 @@ import 'package:grocery_store/widgets/custom_text_field.dart';
 import 'package:grocery_store/widgets/text_button.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../util/user.dart';
 import '../../util/utils.dart';
 import '../../widgets/custom_textform_field.dart';
 
@@ -125,43 +126,29 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future signIn() async {
-    // Uncomment the below code to show a loading dialog
-    // showDialog(
-    //   context: context,
-    //   barrierDismissible: false,
-    //   builder: (context) => Center(
-    //     child: CircularProgressIndicator(),
-    //   ),
-    // );
-
     try {
-      // Signing in the user
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
 
-      // Get the user ID from the signed-in user
       String userId = userCredential.user!.uid;
 
-      // Fetch the user data from Firestore
       DocumentSnapshot userData = await FirebaseFirestore.instance
           .collection('users')
           .doc(userId)
           .get();
 
       if (userData.exists) {
-        // Handle the user data as needed
         Map<String, dynamic> userInfo = userData.data() as Map<String, dynamic>;
+        // groceryModel.userId = userId;
+        UserPreferences.setUser(userId);
         print('User Info: $userInfo');
-
-        // You can now use userInfo in your app
       } else {
         print('No user data found in Firestore');
       }
 
-      // Navigate to HomePage
       Navigator.pushNamed(context, 'HomePage');
     } on FirebaseAuthException catch (error) {
       print(error);

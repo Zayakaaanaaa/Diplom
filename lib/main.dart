@@ -13,10 +13,12 @@ import 'package:grocery_store/util/constants.dart';
 import 'package:grocery_store/util/routes.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:sizer/sizer.dart';
+import 'util/user.dart';
 import 'util/utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await UserPreferences.init();
   await Firebase.initializeApp();
 
   runApp(MyApp());

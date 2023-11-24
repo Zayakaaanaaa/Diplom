@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_store/model/cart_list.dart';
 import 'package:grocery_store/pages/price_compare_screen.dart';
 import 'package:grocery_store/util/constants.dart';
+import 'package:grocery_store/util/user.dart';
 import 'package:grocery_store/widgets/cart_items_container.dart';
 import 'package:grocery_store/widgets/custom_app_bar.dart';
 import 'package:grocery_store/widgets/text_button.dart';
@@ -22,8 +26,42 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  String? userID = UserPreferences.getUser();
   int bottomBarIndex = 2;
-  final List<CartItem> _cartItems = GroceryModel.getCartItems();
+  Future<List<CartProduct>>? _cartItems;
+  GroceryModel groceryModel = GroceryModel();
+  Future<List<String>>? s;
+
+  // Future<void> getSubcollectionDocumentIds(String userID) async {
+  //   try {
+  //     // Check if userID is not empty.
+  //     if (userID.isEmpty) {
+  //       print('User ID is empty.');
+  //       return;
+  //     }
+
+  //     QuerySnapshot subcollectionSnapshot = await FirebaseFirestore.instance
+  //         .collection('cartProducts')
+  //         .doc(userID)
+  //         .collection('product')
+  //         .get();
+
+  //     // Loop through the documents in the subcollection and print their IDs.
+  //     subcollectionSnapshot.docs.forEach((doc) {
+  //       print('Subcollection Document ID: ${doc.id}');
+  //     });
+  //   } catch (e) {
+  //     print('Error getting subcollection document IDs: $e');
+  //   }
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+    // groceryModel.getSubcollectionDocumentData(userID!);
+
+    _cartItems = groceryModel.getSubcollectionDocumentData(userID!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,16 +79,14 @@ class _CartScreenState extends State<CartScreen> {
             child: Column(
               children: [
                 (_cartItems == null)
-                    ? Container(
-                        height: 25.h,
-                        decoration: const BoxDecoration(color: kPrimaryColor))
-                    : (_cartItems.isEmpty)
-                        ? const Center(
-                            child: Text("k404Text"),
-                          )
-                        : CartItemContainer(
-                            cartItems: _cartItems,
-                          ),
+                    ? Text('null ym algoo end chin')
+                    : CartItemContainer(
+                        cartItems: _cartItems!,
+                      ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text('card'),
+                ),
                 CustomTextButton(
                   text: kCartScreenButtonText,
                   onPressed: () {

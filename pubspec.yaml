@@ -38,6 +38,7 @@ dependencies:
   cloud_firestore: ^4.12.2
   carousel_slider: ^4.2.1
   sizer: ^2.0.15
+  shared_preferences: ^2.0.6
   smooth_page_indicator: ^1.1.0
   expandable: ^5.0.1
   font_awesome_flutter: ^10.4.0

@@ -12,6 +12,7 @@ import '../model/store_price.dart';
 import '../pages/auth/login_screen.dart';
 import '../services/grocery.dart';
 import '../util/constants.dart';
+import '../util/user.dart';
 import 'product_card.dart';
 import 'product_card_container.dart';
 import 'text_button.dart';
@@ -25,8 +26,6 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  GroceryModel groceryModel = GroceryModel();
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final List<ProductDetail> newProducts = GroceryModel.addProduct();
   final List<StoreDetail> newStores = GroceryModel.addStore();
 
@@ -99,6 +98,8 @@ class _UserProfileState extends State<UserProfile> {
             ),
             CustomTextButton(
               onPressed: () {
+                UserPreferences.clearUser();
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(

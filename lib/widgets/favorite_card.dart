@@ -38,7 +38,7 @@ class FavoriteItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
-            favoriteItems.img,
+            'ssss',
             height: 8.h,
           ),
           SizedBox(
@@ -48,14 +48,14 @@ class FavoriteItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  favoriteItems.name,
+                  'adqaadada',
                   style: kProductDetailsNameTextStyle,
                 ),
                 SizedBox(
                   height: 2.w,
                 ),
                 Text(
-                  favoriteItems.subName,
+                  'asdad',
                   style: kRegular12,
                 ),
               ],
@@ -66,7 +66,7 @@ class FavoriteItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                '\$${favoriteItems.price}',
+                '\$',
                 style: kMedium12,
               ),
               const Icon(Icons.keyboard_arrow_right_rounded),

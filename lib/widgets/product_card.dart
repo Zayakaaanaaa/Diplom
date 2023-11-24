@@ -17,22 +17,22 @@ class ProductDetails extends StatelessWidget {
   const ProductDetails(
       {super.key, required this.productDetail, required this.id});
 
-  Future<void> navigateToDetailScreen(BuildContext context) async {
-    try {
-      // Fetch the document from Firestore using the document ID
-      DocumentSnapshot docSnapshot = await FirebaseFirestore.instance
-          .collection('productDetails')
-          .doc(id)
-          .get();
+  // Future<void> navigateToDetailScreen(BuildContext context) async {
+  //   try {
+  //     // Fetch the document from Firestore using the document ID
+  //     DocumentSnapshot docSnapshot = await FirebaseFirestore.instance
+  //         .collection('productDetails')
+  //         .doc(id)
+  //         .get();
 
-      // Create a ProductDetail object from the snapshot
-      ProductDetail productDetail =
-          ProductDetail.fromDocumentSnapshot(docSnapshot);
-    } catch (e) {
-      // Handle errors or non-existent documents
-      print('Error fetching product details: $e');
-    }
-  }
+  //     // Create a ProductDetail object from the snapshot
+  //     ProductDetail productDetail =
+  //         ProductDetail.fromDocumentSnapshot(docSnapshot);
+  //   } catch (e) {
+  //     // Handle errors or non-existent documents
+  //     print('Error fetching product details: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +42,7 @@ class ProductDetails extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => DetailScreen(
+              id : id,
               productDetail: productDetail,
             ),
           ),

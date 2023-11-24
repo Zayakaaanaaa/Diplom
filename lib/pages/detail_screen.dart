@@ -7,12 +7,15 @@ import 'package:grocery_store/widgets/expandable_widget.dart';
 import 'package:grocery_store/widgets/product_card.dart';
 import 'package:grocery_store/widgets/text_button.dart';
 import 'package:sizer/sizer.dart';
+import '../util/user.dart';
 import '../widgets/custom_app_bar.dart';
 
 class DetailScreen extends StatefulWidget {
+  final String id;
   final ProductDetail productDetail;
 
-  const DetailScreen({super.key, required this.productDetail});
+  const DetailScreen(
+      {super.key, required this.productDetail, required this.id});
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -25,6 +28,8 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  int _quantity = 1;
+
   // List<widget.ProductDetailidget.productDetailGroceryModel.getProductDetail();
 
   // @override
@@ -42,6 +47,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String? userID = UserPreferences.getUser();
     return Scaffold(
       backgroundColor: kScaffoldColor,
       appBar: const CustomAppBar(
@@ -95,21 +101,37 @@ class _DetailScreenState extends State<DetailScreen> {
                                 // ),
                               ],
                             ),
-                            Container(
-                              padding: EdgeInsets.only(right: 2.w),
-                              child: Icon(
-                                Icons.favorite_border_rounded,
-                                size: 24.0.sp,
-                                color: kInActiveFavoriteButtonColor,
+                            GestureDetector(
+                              onTap: () async {
+                                await firestore
+                                    .collection('favoriteProducts')
+                                    .doc(userID)
+                                    .collection('product')
+                                    .add(
+                                  {
+                                    'product': widget.id,
+                                  },
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(right: 2.w),
+                                child: Icon(
+                                  Icons.favorite_border_rounded,
+                                  size: 24.0.sp,
+                                  color: kInActiveFavoriteButtonColor,
+                                ),
                               ),
                             )
                           ],
                         ),
                         SizedBox(height: 3.h),
-                        const CustomCounter(
+                        CustomCounter(
+                          onCounterChanged: (quantity) {
+                            _quantity = quantity;
+                          },
                           buttonBorder: true,
                           counterBorder: false,
-                          quantity: 5,
+                          quantity: _quantity,
                         ),
                         SizedBox(
                           height: 3.h,
@@ -118,17 +140,11 @@ class _DetailScreenState extends State<DetailScreen> {
                           title: widget.productDetail.productDetailTitle!,
                           description: widget.productDetail.productDetail!,
                         ),
-                        
-                        // ExpandableWidget(
-                        //   title:
-                        //       widget.productDetail.productDetail.nutritionTitle!,
-                        //   description:
-                        //       widget.productDetail.productDetail.nutritionDetail!,
-                        // ),
                         CustomTextButton(
                           text: 'text',
-                          onPressed: () {
-                            print('add to basket');
+                          onPressed: () async {
+                            groceryModel.addProductToCart(
+                                userID!, widget.id, _quantity);
                           },
                         ),
                       ],
