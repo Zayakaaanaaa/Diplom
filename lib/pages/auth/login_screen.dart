@@ -3,11 +3,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grocery_store/pages/home.dart';
-import 'package:grocery_store/pages/onboarding_screen.dart';
 import 'package:grocery_store/pages/auth/sign_up_screen.dart';
 import 'package:grocery_store/util/constants.dart';
-import 'package:grocery_store/util/routes.dart';
+import 'package:grocery_store/util/employee.dart';
 import 'package:grocery_store/widgets/custom_text_field.dart';
 import 'package:grocery_store/widgets/text_button.dart';
 import 'package:sizer/sizer.dart';
@@ -26,27 +24,19 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isObscure = true;
-
-  // @override
-  // void dispose() {
-  //   _emailController.dispose();
-  //   _passwordController.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          padding: EdgeInsets.fromLTRB(
-            8.w,
-            20.w,
-            8.w,
-            8.w,
-          ),
-          child: SingleChildScrollView(
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.fromLTRB(
+              8.w,
+              10.w,
+              8.w,
+              8.w,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,9 +82,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 2.h),
                 CustomTextButton(
-                  text: 'Log in',
+                  text: 'Нэвтрэх',
                   onPressed: () {
-                    signIn();
+                    signIn(context);
                     // Navigator.pushNamed(context, 'HomePage');
                   },
                 ),
@@ -104,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text('Don\'t have an account?'),
+                    Text('Бүртгэлтэй хаяг байхгүй юу?'),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -113,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               builder: (context) => SignUpScreen()),
                         );
                       },
-                      child: Text('Sign in'),
+                      child: Text('Бүртгүүлэх'),
                     )
                   ],
                 ),
@@ -125,41 +115,75 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future signIn() async {
+  Future<void> signIn(BuildContext context) async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      Utils.showSnackBar('Please enter both email and password.');
+      return;
+    }
+
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
+        email: email,
+        password: password,
       );
 
       String userId = userCredential.user!.uid;
+      UserPreferences.setUser(userId);
 
-      DocumentSnapshot userData = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(userId)
-          .get();
-
-      if (userData.exists) {
-        Map<String, dynamic> userInfo = userData.data() as Map<String, dynamic>;
-        // groceryModel.userId = userId;
-        UserPreferences.setUser(userId);
-        print('User Info: $userInfo');
-      } else {
-        print('No user data found in Firestore');
-      }
-
-      Navigator.pushNamed(context, 'HomePage');
+      await checkUserRoleAndNavigate(userId, context);
     } on FirebaseAuthException catch (error) {
-      print(error);
-      Utils.showSnackBar(error.message); // Displaying the error message
+      Utils.showSnackBar(error.message);
     } catch (e) {
-      // Handle any other errors
-      print(e);
-      Utils.showSnackBar(e.toString());
+      Utils.showSnackBar('An error occurred: ${e.toString()}');
+    }
+  }
+
+  Future<void> checkUserRoleAndNavigate(
+      String userId, BuildContext context) async {
+    String? userRole;
+
+    if (await checkIfDocumentExists('admin', userId)) {
+      userRole = 'admin';
+    } else if (await checkIfDocumentExists('storeEmployee', userId)) {
+      EmployeePreferences.setEmployee(userId);
+      userRole = 'employee';
+    } else if (await checkIfDocumentExists('users', userId)) {
+      userRole = 'user';
     }
 
-    // Uncomment the below code to close the loading dialog
-    // Navigator.pop(context); // Close the loading dialog
+    if (userRole != null) {
+      await UserPreferences.setUserRole(userRole);
+      navigateToRoleBasedScreen(userRole, context);
+    } else {
+      Utils.showSnackBar('Хэрэглэгчийн мэдээлэл олдсонгүй');
+    }
+  }
+
+  Future<bool> checkIfDocumentExists(String collection, String docId) async {
+    DocumentSnapshot docSnapshot = await FirebaseFirestore.instance
+        .collection(collection)
+        .doc(docId)
+        .get();
+    return docSnapshot.exists;
+  }
+
+  void navigateToRoleBasedScreen(String userRole, BuildContext context) {
+    switch (userRole) {
+      case 'admin':
+        Navigator.pushNamed(context, 'AdminProfileScreen');
+        break;
+      case 'employee':
+        Navigator.pushNamed(context, 'EmployeeProfileScreen');
+        break;
+      case 'user':
+        Navigator.pushNamed(context, 'UserProfileScreen');
+        break;
+      default:
+        Utils.showSnackBar('Бүртгэлгүй хэрэглэгч');
+    }
   }
 }

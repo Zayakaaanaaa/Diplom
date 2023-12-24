@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 
 import '../util/constants.dart';
@@ -27,8 +26,9 @@ class SearchTextField extends StatelessWidget {
             filled: true,
             fillColor: kTextFieldColor,
             prefixIcon: Padding(
-                padding: EdgeInsets.fromLTRB(5.w, 3.w, 3.w, 3.w),
-                child: Icon(Icons.search)),
+              padding: EdgeInsets.fromLTRB(5.w, 3.w, 3.w, 3.w),
+              child: Icon(Icons.search),
+            ),
           ),
         ),
       ),

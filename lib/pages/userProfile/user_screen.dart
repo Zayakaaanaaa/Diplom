@@ -1,24 +1,20 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grocery_store/services/grocery.dart';
-import 'package:grocery_store/widgets/text_button.dart';
+import 'package:grocery_store/util/constants.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../model/user.dart';
-import '../../widgets/user_profile.dart';
-import '../auth/login_screen.dart';
+import '../../model/profile/user.dart';
+import 'user_profile.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class UserProfileScreen extends StatefulWidget {
+  const UserProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<UserProfileScreen> createState() => _UserProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _UserProfileScreenState extends State<UserProfileScreen> {
   String userId = FirebaseAuth.instance.currentUser!.uid;
-  GroceryModel groceryModel = GroceryModel();
   Future<UserModel>? userData;
 
   @override
@@ -31,7 +27,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
             } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
+              return GestureDetector(
+                  onTap: () {
+                    print(userId);
+                  },
+                  child: Text('Error: ${snapshot.error}ssss'));
             } else if (snapshot.hasData) {
               UserModel userData = snapshot.data!;
               // return Text('data');

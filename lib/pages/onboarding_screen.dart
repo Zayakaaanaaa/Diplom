@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_store/pages/auth/login_screen.dart';
-import 'package:grocery_store/pages/auth/sign_up_screen.dart';
 import 'package:grocery_store/util/constants.dart';
 import 'package:grocery_store/widgets/text_button.dart';
 import 'package:sizer/sizer.dart';
@@ -41,12 +40,12 @@ class _OnboardingState extends State<Onboarding> {
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
                 // color: Colors.black.withOpacity(0.6),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       kOnboardingText,
                       style: kOnboardingTextStyle,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
                     ),
                     // SizedBox(height: 1.h),
                     CustomTextButton(

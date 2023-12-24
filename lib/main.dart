@@ -2,17 +2,14 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
 import 'package:grocery_store/pages/home.dart';
-import 'package:grocery_store/pages/auth/login_screen.dart';
-import 'package:grocery_store/pages/profile/get_profile_information_screen.dart';
-import 'package:grocery_store/pages/map/map_screen.dart';
-import 'package:grocery_store/pages/auth/sign_up_screen.dart';
+import 'package:grocery_store/pages/userProfile/get_profile_information_screen.dart';
+import 'package:grocery_store/pages/adminProfile/admin_screen.dart';
+import 'package:grocery_store/pages/employee_screens/employee_screen.dart';
 import 'package:grocery_store/pages/splash_screen.dart';
 import 'package:grocery_store/util/constants.dart';
-import 'package:grocery_store/util/routes.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:sizer/sizer.dart';
+import 'pages/userProfile/user_screen.dart';
 import 'util/user.dart';
 import 'util/utils.dart';
 
@@ -20,7 +17,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await UserPreferences.init();
   await Firebase.initializeApp();
-
   runApp(MyApp());
 }
 
@@ -37,12 +33,14 @@ class MyApp extends StatelessWidget {
           routes: {
             'HomePage': (context) => HomePage(),
             'ProfileInformationScreen': (context) => ProfileInformationScreen(),
-            // Define other routes as needed
+            'UserProfileScreen': (context) => UserProfileScreen(),
+            'EmployeeProfileScreen': (context) => EmployeeProfileScreen(),
+            'AdminProfileScreen': (context) => AdminProfileScreen(),
           },
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
-              fontFamily: 'Gilroy',
+              // fontFamily: 'Gilroy',
               primaryColor: kPrimaryColor,
               scaffoldBackgroundColor: kScaffoldColor),
           home: SplashScreen(

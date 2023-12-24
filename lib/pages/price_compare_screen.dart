@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_store/widgets/custom_app_bar.dart';
 import 'package:sizer/sizer.dart';
-
-import '../services/grocery.dart';
 import '../util/constants.dart';
-import '../widgets/store_card.dart';
-import '../widgets/store_item_container.dart';
+import '../widgets/store/store_card.dart';
+import '../widgets/store/store_item_container.dart';
+
 
 class PriceCompareScreen extends StatefulWidget {
   const PriceCompareScreen({super.key});
@@ -15,8 +14,18 @@ class PriceCompareScreen extends StatefulWidget {
 }
 
 class _PriceCompareScreenState extends State<PriceCompareScreen> {
+  Future<List<StoreCard>>? _stores;
+
+  Future<void> loadData() async {
+    _stores = groceryModel.getStores(false);
+  }
+
   @override
-  // final List<StoreCard> _storeDetail = GroceryModel.getStoreDetail();
+  void initState() {
+    loadData();
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,23 +36,32 @@ class _PriceCompareScreenState extends State<PriceCompareScreen> {
           bgColor: kScaffoldColor,
           leadIcon: Icon(Icons.arrow_back),
         ),
-        body: Padding(
-            padding: EdgeInsets.fromLTRB(5.w, 0, 5.w, 5.w), child: Container()
-            // SingleChildScrollView(
-            //   child: (_storeDetail == null)
-            //       ? Container(
-            //           height: 25.h,
-            //           decoration: const BoxDecoration(color: kPrimaryColor),
-            //         )
-            //       : (_storeDetail.isEmpty)
-            //           ? const Center(
-            //               child: Text("k404Text"),
-            //             )
-            //           : StoreItemContainer(
-            //               storeCard: _storeDetail,
-            //             ),
-            // ),
-            ),
+        body: Container(
+          padding: EdgeInsets.fromLTRB(5.w, 0, 5.w, 5.w),
+          child: FutureBuilder<List<StoreCard>>(
+            future: _stores,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                // Display loading indicator while data is loading
+                return CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                // Handle error case
+                return Text("Error: ${snapshot.error}");
+              } else if (snapshot.hasData) {
+                // Data loaded successfully
+                List<StoreCard> _stores = snapshot.data!;
+                return SingleChildScrollView(
+                  child: StoreItemContainer(
+                    storeCard: _stores,
+                  ),
+                );
+              } else {
+                // Handle no data case
+                return Text("No products found");
+              }
+            },
+          ),
+        ),
       ),
     );
   }

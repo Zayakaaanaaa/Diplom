@@ -24,7 +24,7 @@ class BottomNavigationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 1.w),
+      padding: EdgeInsets.symmetric(horizontal: 0.5.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3.w),
         color: active ? kPrimaryColor.withOpacity(0.20) : null,

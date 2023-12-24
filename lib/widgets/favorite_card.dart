@@ -3,6 +3,11 @@ import 'package:grocery_store/model/cart_list.dart';
 import 'package:grocery_store/util/constants.dart';
 import 'package:sizer/sizer.dart';
 
+import '../model/product_detail.dart';
+import '../pages/favorite_screen.dart';
+import '../services/grocery.dart';
+import '../util/user.dart';
+
 class FavoriteItem extends StatelessWidget {
   final CartProduct favoriteItems;
 
@@ -14,7 +19,7 @@ class FavoriteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 12.h,
+      height: 14.h,
       width: double.infinity,
       // padding: EdgeInsets.all(2.w),
       margin: EdgeInsets.symmetric(horizontal: 2.w),
@@ -23,56 +28,78 @@ class FavoriteItem extends StatelessWidget {
         color: kScaffoldColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey
-                .withOpacity(0.2), // Shadow color with some transparency
-            spreadRadius: 1, // Extend the shadow to all sides by 1 unit
-            blurRadius: 5, // Blur radius for the shadow
-            offset: const Offset(0, 3), // Position of the shadow
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
           ),
         ],
-        // border: Border(
-        //   top: BorderSide(color: kBorderColor, width: 1.sp),
-        // ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Image.asset(
-            'ssss',
-            height: 8.h,
-          ),
-          SizedBox(
-            width: 40.w,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'adqaadada',
-                  style: kProductDetailsNameTextStyle,
-                ),
-                SizedBox(
-                  height: 2.w,
-                ),
-                Text(
-                  'asdad',
-                  style: kRegular12,
-                ),
-              ],
-            ),
-          ),
-          Row(
+      child: FutureBuilder<ProductDetail>(
+        future: groceryModel.getProductDetail1(favoriteItems.product),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          }
+          if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          }
+          if (!snapshot.hasData) {
+            return Text('No data available');
+          }
+          final productDetail = snapshot.data!;
+          return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                '\$',
-                style: kMedium12,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 3.w),
+                    child: Image.network(
+                      productDetail.img,
+                      height: 10.h,
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 35.w,
+                        child: Text(
+                          productDetail.name,
+                          style: kMedium12,
+                        ),
+                      ),
+                      Text(
+                        ("₮${productDetail.emart}"),
+                        style: kMedium12,
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              const Icon(Icons.keyboard_arrow_right_rounded),
+              Container(
+                margin: EdgeInsets.only(right: 5.h),
+                child: IconButton(
+                  onPressed: () {
+                    groceryModel.removeFavorite(favoriteItems.prodcutDocId);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FavoriteScreen()));
+                  },
+                  icon: Icon(
+                    Icons.favorite_rounded,
+                    size: 40,
+                    color: Colors.red,
+                  ),
+                ),
+              )
             ],
-          )
-        ],
+          );
+        },
       ),
     );
   }

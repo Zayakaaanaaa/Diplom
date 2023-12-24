@@ -1,71 +1,72 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:grocery_store/model/store_price.dart';
 
 class ProductDetail {
   final String? id;
   final int catId;
   final String name;
-  final List<PriceStores> price;
-  // final String size;
   final String barcode;
   final String img;
   String? productDetailTitle;
   String? productDetail;
-  // String? nutritionTitle;
-  // String? nutritionDetail;
+  double? nomin;
+  double? sansar;
+  double? emart;
+  double? mmart;
+  double? msuljee;
+  double? carrefour;
 
-  ProductDetail(
-      {this.id,
-      required this.barcode,
-      required this.catId,
-      required this.img,
-      required this.name,
-      // required this.size,
-      required this.productDetailTitle,
-      required this.productDetail,
-      // required this.nutritionDetail,
-      // required this.nutritionTitle,
-      required this.price});
+  ProductDetail({
+    this.id,
+    required this.barcode,
+    required this.catId,
+    required this.img,
+    required this.name,
+    required this.productDetailTitle,
+    required this.productDetail,
+    this.carrefour,
+    this.emart,
+    this.mmart,
+    this.msuljee,
+    this.nomin,
+    this.sansar,
+  });
 
   factory ProductDetail.fromDocumentSnapshot(DocumentSnapshot doc) {
     Map<String, dynamic> json = doc.data() as Map<String, dynamic>;
 
-    // Assuming 'price' is a list of maps
-    List<PriceStores> priceStores = (json['price'] as List)
-        .map((priceJson) =>
-            PriceStores.fromMap(priceJson as Map<String, dynamic>))
-        .toList();
-
     return ProductDetail(
-      id: doc.id, // Assuming you want to convert the document ID to int
+      id: doc.id,
       catId: json['catId'] ?? 0,
       name: json['name'] ?? '',
-      price: priceStores,
-      // size: json['size'] ?? '',
+      // price: priceStores,
       barcode: json['barcode'] ?? '',
       img: json['img'] ?? '',
       productDetailTitle: json['productDetailTitle'],
       productDetail: json['productDetail'],
-      // nutritionTitle: json['nutritionTitle'],
-      // nutritionDetail: json['nutritionDetail'],
+      emart: json['emart'],
+      sansar: json['sansar'],
+      mmart: json['mmart'],
+      nomin: json['nomin'],
+      carrefour: json['carrefour'],
+      msuljee: json['msuljee'],
     );
   }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'catId': catId,
-      'name': name,
-      'price': price.map((p) => p.toMap()).toList(),
-      // 'size': size,
+      'name': name.toLowerCase().trim(),
       'barcode': barcode,
       'img': img,
       'productDetailTitle': productDetailTitle,
       'productDetail': productDetail,
-      // 'nutritionTitle': nutritionTitle,
-      // 'nutritionDetail': nutritionDetail,
+      'emart': emart,
+      'sansar': sansar,
+      'mmart': mmart,
+      'nomin': nomin,
+      'carrefour': carrefour,
+      'msuljee': msuljee,
     };
   }
 }
-
-
-// }

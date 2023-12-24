@@ -9,37 +9,35 @@ import '../services/grocery.dart';
 // final GlobalKey<HomePage> khomeScreenKey = GlobalKey();
 
 const google_api_key = "AIzaSyC3fDSJW4tNfnqrhuzPlGFF-fjuMbJKG6g";
-const kHomeScreenLocationText = "location";
-const kHomeScreenHintText = "Search Store";
-const kHomeScreenCategoriesText = "Categories";
-const kHomeScreenListViewText = "See all";
-const kHomeScreenShopListText = "Stores";
-const kBottomNavigationFirstText = "Shop";
-const kBottomNavigationSecondText = "Explore";
-const kBottomNavigationThirdText = "Cart";
-const kBottomNavigationFourthText = "Favorite";
-const kBottomNavigationFifthText = "Account";
-const kCategoryScreenTitle = "Find Products";
-const k404Text = "Products not found";
-const kCategoryItemsScreenTitle = 'Oils';
-const kCartScreenTitle = 'My Cart';
-const kCartScreenButtonText = 'Go to ChechOut';
-const kFavoriteScreenButtonText = 'Add All To Cart';
-const kFavoriteScreenTitle = 'Favorite';
+const kHomeScreenLocationText = "Байршил";
+const kHomeScreenHintText = "Хайлт";
+const kHomeScreenCategoriesText = "Ангилал";
+const kHomeScreenListViewText = "Бүгдийг харах";
+const kHomeScreenShopListText = "Дэлгүүр";
+const kBottomNavigationFirstText = "Нүүр";
+const kBottomNavigationSecondText = "Хайх";
+const kBottomNavigationThirdText = "Сагс";
+const kBottomNavigationFourthText = "Дуртай";
+const kBottomNavigationFifthText = "Профайл";
+const kCategoryScreenTitle = "Бүтээгдэхүүн хайх";
+const k404Text = "Бүтээгдэхүүн олдсонгүй";
+const kCartScreenTitle = 'Миний бүтээгдэхүүн';
+const kCartScreenButtonText = 'Үнэ харьцуулах';
+const kFavoriteScreenButtonText = 'Бүгдийг сагсанд нэмэх';
+const kFavoriteScreenTitle = 'Хадгалсан бүтээгдэхүүн';
 const kSplashScreenText = 'NECTAR';
-const kOnboardingText = 'Welcome to our store';
-const kOnboardingButtonText = 'Get Started';
-const kLoginScreenText = "Loging";
-const kLoginScreenText1 = 'Enter your emails and password';
-const kSignUpText = "Sign Up";
-const kSignUpText1 = 'Enter your crendentials to continue';
-const kEmailText = 'Email';
-const kPasswordText = 'Password';
-const kForgetPassword = 'Forgot Password?';
-const kProfileScreenTitle = 'Fill in your bio';
-const kUploadPhotoTitle = 'Upload your photo';
-const kProfileScreenText =
-    'This data will be displayed in your account profile for security';
+const kOnboardingText = 'Тавтай морил';
+const kOnboardingButtonText = 'Эхлүүлэх';
+const kLoginScreenText = "Нэвтрэх";
+const kLoginScreenText1 = 'Цахим шуудан болон нууц үгээ оруулна уу';
+const kSignUpText = "Бүртгүүлэх";
+const kSignUpText1 = 'Хэрэглэгчийн мэдээллээ оруулна уу';
+const kEmailText = 'Цахим шуудан';
+const kPasswordText = 'Нууц үг';
+const kForgetPassword = 'Нүүц үгээ мартсан?';
+const kProfileScreenTitle = 'Хувийн мэдээлэл';
+const kUploadPhotoTitle = 'Зургаа оруулна уу';
+const kProfileScreenText = 'Энэ мэдээллийг таны профайлд харуулах болно';
 
 const kPrimaryColor = Color(0xff38D683);
 const kPrimaryGradient = LinearGradient(
@@ -67,7 +65,8 @@ final navigatorKey = GlobalKey<NavigatorState>();
 
 final kBoxShadow = [
   BoxShadow(
-    color: Colors.blue.withOpacity(0.1), // Shadow color with some transparency
+    color:
+        kPrimaryColor.withOpacity(0.15), // Shadow color with some transparency
     spreadRadius: 5, // Extend the shadow to all sides by 1 unit
     blurRadius: 7, // Blur radius for the shadow
     offset: const Offset(0, 3), // Position of the shadow
@@ -107,6 +106,11 @@ final kSemibold18 = TextStyle(
   fontWeight: FontWeight.w500,
   color: kCategoryTextColor,
 );
+final kSemibold22 = TextStyle(
+  fontSize: 22.sp,
+  fontWeight: FontWeight.w500,
+  color: kCategoryTextColor,
+);
 
 final kHomeScreenListViewTextStyle = TextStyle(
   fontSize: 12.sp,
@@ -115,21 +119,52 @@ final kHomeScreenListViewTextStyle = TextStyle(
 );
 
 final kProductDetailsNameTextStyle = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w500,
+    color: kCategoryTextColor,
+    overflow: TextOverflow.clip);
+
+final kRegular12Black = TextStyle(
   fontSize: 12.sp,
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w400,
   color: kCategoryTextColor,
 );
 
-final kRegular12 = TextStyle(
+final kRegularGrey12 = TextStyle(
   fontSize: 10.sp,
   fontWeight: FontWeight.w300,
   color: kSearchHintTextColor,
 );
 
+final kRegular12 = TextStyle(
+    fontSize: 10.sp, fontWeight: FontWeight.w300, color: Colors.black);
+
+final kPrimary12 = TextStyle(
+    fontSize: 10.sp, fontWeight: FontWeight.w500, color: kPrimaryColor);
+
+final kPrimary13 = TextStyle(
+    fontSize: 13.sp, fontWeight: FontWeight.w500, color: kPrimaryColor);
+final kRegular10 = TextStyle(
+  fontSize: 10.sp,
+  fontWeight: FontWeight.w300,
+  color: Colors.black,
+);
+
 final kMedium12 = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w600,
+    color: kCategoryTextColor,
+    overflow: TextOverflow.fade);
+
+final kMediumGrey12 = TextStyle(
   fontSize: 12.sp,
   fontWeight: FontWeight.w500,
-  color: kCategoryTextColor,
+  color: kSearchHintTextColor,
+);
+final kMediumGrey10 = TextStyle(
+  fontSize: 10.sp,
+  fontWeight: FontWeight.w500,
+  color: kSearchHintTextColor,
 );
 
 final kButtonTextStyle = TextStyle(
@@ -154,6 +189,17 @@ final kSemibold12 = TextStyle(
   fontWeight: FontWeight.w600,
   color: kSearchHintTextColor,
 );
+final kSemiboldBlack12 = TextStyle(
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w600,
+  color: Colors.black,
+);
+
+final kSemibold15 = TextStyle(
+  fontSize: 15.sp,
+  fontWeight: FontWeight.w600,
+  color: Colors.black,
+);
 
 final kCongratsStyle = TextStyle(
   fontSize: 18.sp,
@@ -163,6 +209,4 @@ final kCongratsStyle = TextStyle(
 
 typedef CounterChangedCallback = void Function(int newCount);
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
-final  GroceryModel groceryModel = GroceryModel();
-
-
+final GroceryModel groceryModel = GroceryModel();

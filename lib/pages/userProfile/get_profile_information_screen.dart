@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grocery_store/pages/profile/upload_photo_screen.dart';
+import 'package:grocery_store/pages/userProfile/upload_photo_screen.dart';
 import 'package:grocery_store/util/constants.dart';
 import 'package:grocery_store/widgets/custom_app_bar.dart';
 import 'package:grocery_store/widgets/custom_text_field.dart';
@@ -92,7 +92,7 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            width: 35.w,
+                            width: 38.w,
                             child: CheckboxListTile(
                               activeColor: kPrimaryColor,
                               shape: RoundedRectangleBorder(
@@ -112,7 +112,7 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                             ),
                           ),
                           Container(
-                            width: 35.w,
+                            width: 38.w,
                             child: CheckboxListTile(
                               activeColor: kPrimaryColor,
                               title: const Text('Female'),
@@ -198,7 +198,7 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
       "address": _addressController.text.trim(),
     };
 
-    await FirebaseFirestore.instance.collection('users').doc(userId).set(
+    await firestore.collection('users').doc(userId).set(
           profileData,
           SetOptions(merge: true),
         );

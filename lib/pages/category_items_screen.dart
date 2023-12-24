@@ -4,12 +4,12 @@ import 'package:grocery_store/widgets/behavior.dart';
 import 'package:grocery_store/widgets/custom_app_bar.dart';
 import 'package:sizer/sizer.dart';
 
-import '../services/grocery.dart';
 import '../widgets/product_card.dart';
 import '../widgets/product_card_container.dart';
 
 class CategoryItemsScreen extends StatefulWidget {
-  const CategoryItemsScreen({super.key});
+  final String docId;
+  const CategoryItemsScreen({super.key, required this.docId});
 
   @override
   State<CategoryItemsScreen> createState() => _CategoryItemsScreenState();
@@ -17,16 +17,29 @@ class CategoryItemsScreen extends StatefulWidget {
 
 class _CategoryItemsScreenState extends State<CategoryItemsScreen> {
   int bottomBarIndex = 2;
-  final List<ProductDetails> _ProductDetailss = GroceryModel.getProductDetail();
+  Future<List<ProductDetails>>? _products;
+  String? title;
+  // final List<ProductDetails> _ProductDetailss = GroceryModel.getProductDetail();
+
+  Future<void> loadData() async {
+    _products = groceryModel.getCategoryProducts(widget.docId);
+    title = widget.docId;
+  }
+
+  @override
+  void initState() {
+    loadData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomAppBar(
+        appBar: CustomAppBar(
           bgColor: kScaffoldColor,
           actionIcon: Icon(Icons.filter_alt_outlined),
-          title: kCategoryItemsScreenTitle,
+          title: title,
           leadIcon: Icon(Icons.arrow_back_ios_rounded),
         ),
         body: ScrollConfiguration(
@@ -36,17 +49,29 @@ class _CategoryItemsScreenState extends State<CategoryItemsScreen> {
             padding: EdgeInsets.fromLTRB(3.w, 0, 3.w, 3.w),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: (_ProductDetailss == null)
-                  ? Container(
-                      height: 25.h,
-                      decoration: const BoxDecoration(color: kPrimaryColor))
-                  : (_ProductDetailss.isEmpty)
-                      ? const Center(
-                          child: Text("k404Text"),
-                        )
-                      : ProductDetailsContainer(
-                          productDetail: _ProductDetailss,
-                        ),
+              child: 
+              FutureBuilder<List<ProductDetails>>(
+                future: _products,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text("Error: ${snapshot.error}");
+                  } else if (snapshot.hasData) {
+                    List<ProductDetails> _products = snapshot.data!;
+                    return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Wrap(
+                          children: [
+                            ProductDetailsContainer(
+                                productDetail: _products), // Adjusted
+                          ],
+                        ));
+                  } else {
+                    return Text("No products found");
+                  }
+                },
+              ),
             ),
           ),
         ),

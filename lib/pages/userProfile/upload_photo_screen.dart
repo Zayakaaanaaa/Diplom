@@ -11,7 +11,7 @@ import '../../util/constants.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/icon_container.dart';
 import '../../widgets/text_button.dart';
-import 'upload_photo.dart'; // Replace with your actual next screen import
+import 'upload_photo.dart';
 
 class UploadPhotoScreen extends StatefulWidget {
   const UploadPhotoScreen({super.key});

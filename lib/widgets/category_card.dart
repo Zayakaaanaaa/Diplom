@@ -16,7 +16,9 @@ class CategoryCard extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const CategoryItemsScreen()));
+                builder: (context) => CategoryItemsScreen(
+                      docId: categoryList.name,
+                    )));
       },
       child: Container(
         padding: EdgeInsets.all(2.h),
@@ -31,7 +33,7 @@ class CategoryCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Image.asset(
+            Image.network(
               categoryList.img,
               height: 20.w,
             ),

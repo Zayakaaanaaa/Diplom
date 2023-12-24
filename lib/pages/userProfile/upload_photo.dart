@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_store/pages/profile/location_screen.dart';
+import 'package:grocery_store/pages/userProfile/location_screen.dart';
 import 'package:grocery_store/widgets/text_button.dart';
 import 'package:sizer/sizer.dart';
 

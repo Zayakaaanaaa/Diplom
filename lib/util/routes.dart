@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_store/pages/employee_screens/employee_screen.dart';
 
 import '../pages/home.dart';
+import '../pages/adminProfile/admin_screen.dart';
+import '../pages/userProfile/user_screen.dart';
 
 enum RouteNames {
   HomePage,
-  navigationButton,
-  loginPage,
-  teacherOrStudent,
-  registerPage,
-  courseCreate;
+  AdminProfileScreen,
+  EmployeeProfileScreen,
+  UserProfileScreen
 }
 
 extension RouteExtension on RouteNames {
@@ -16,25 +17,19 @@ extension RouteExtension on RouteNames {
     switch (this) {
       case RouteNames.HomePage:
         return 'HomePage';
-      case RouteNames.navigationButton:
-        return 'navigationButton';
-      case RouteNames.loginPage:
-        return 'loginPage';
-      case RouteNames.teacherOrStudent:
-        return 'teacherorstudent';
-      case RouteNames.registerPage:
-        return 'registerPage';
-      case RouteNames.courseCreate:
-        return 'courseCreate';
+      case RouteNames.AdminProfileScreen:
+        return 'AdminProfileScreen';
+      case RouteNames.EmployeeProfileScreen:
+        return 'EmployeeProfileScreen';
+      case RouteNames.UserProfileScreen:
+        return 'UserProfileScreen';
     }
   }
 }
 
 var routes = <String, WidgetBuilder>{
   RouteNames.HomePage.route: (_) => HomePage(),
-  // RouteNames.navigationButton.route: (_) => NavigationButton(),
-  // RouteNames.loginPage.route: (_) => LoginPage(),
-  // RouteNames.teacherOrStudent.route: (_) => TeacherOrStudent(),
-  // RouteNames.registerPage.route: (_) => RegisterPage(),
-  // RouteNames.courseCreate.route: (_) => CourseCreate(),
+  RouteNames.AdminProfileScreen.route: (_) => AdminProfileScreen(),
+  RouteNames.EmployeeProfileScreen.route: (_) => EmployeeProfileScreen(),
+  RouteNames.UserProfileScreen.route: (_) => UserProfileScreen(),
 };

@@ -1,14 +1,12 @@
 // ignore_for_file: empty_constructor_bodies
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_store/model/product_detail.dart';
 import 'package:grocery_store/util/constants.dart';
 import 'package:sizer/sizer.dart';
-
-import '../model/store_price.dart';
 import '../pages/detail_screen.dart';
-import '../services/grocery.dart';
+import '../util/user.dart';
+import '../util/utils.dart';
 
 class ProductDetails extends StatelessWidget {
   final String id;
@@ -17,32 +15,18 @@ class ProductDetails extends StatelessWidget {
   const ProductDetails(
       {super.key, required this.productDetail, required this.id});
 
-  // Future<void> navigateToDetailScreen(BuildContext context) async {
-  //   try {
-  //     // Fetch the document from Firestore using the document ID
-  //     DocumentSnapshot docSnapshot = await FirebaseFirestore.instance
-  //         .collection('productDetails')
-  //         .doc(id)
-  //         .get();
-
-  //     // Create a ProductDetail object from the snapshot
-  //     ProductDetail productDetail =
-  //         ProductDetail.fromDocumentSnapshot(docSnapshot);
-  //   } catch (e) {
-  //     // Handle errors or non-existent documents
-  //     print('Error fetching product details: $e');
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
+    int _quantity = 1;
+    String? userID = UserPreferences.getUser();
+
     return GestureDetector(
       onTap: () async {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => DetailScreen(
-              id : id,
+              id: id,
               productDetail: productDetail,
             ),
           ),
@@ -75,6 +59,7 @@ class ProductDetails extends StatelessWidget {
             Text(
               productDetail.name,
               style: kProductDetailsNameTextStyle,
+              overflow: TextOverflow.ellipsis,
             ),
             SizedBox(
               height: 1.h,
@@ -83,12 +68,13 @@ class ProductDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "\$${GroceryModel.getCheapestPrice(productDetail.price).price.toStringAsFixed(2)}",
+                  '${productDetail.sansar}',
                   style: kMedium12,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    print('test');
+                  onTap: () async {
+                    groceryModel.addProductToCart(userID!, id, _quantity);
+                    Utils.showSnackBar('Бүтээгдэхүүнийг сагсанд нэмлээ.');
                   },
                   child: Container(
                     height: 10.w,

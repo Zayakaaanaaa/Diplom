@@ -8,7 +8,8 @@ class ExpandableWidget extends StatefulWidget {
   final String title;
   final String description;
 
-  const ExpandableWidget({super.key, required this.title, required this.description});
+  const ExpandableWidget(
+      {super.key, required this.title, required this.description});
 
   @override
   State<ExpandableWidget> createState() => _ExpandableWidgetState();
@@ -45,7 +46,7 @@ class _ExpandableWidgetState extends State<ExpandableWidget> {
             padding: EdgeInsets.all(1.h),
             child: Text(
               widget.title,
-              style: kProductDetailsNameTextStyle,
+              style: kMedium12,
             ),
           ),
           collapsed: Container(
@@ -55,7 +56,7 @@ class _ExpandableWidgetState extends State<ExpandableWidget> {
             padding: EdgeInsets.all(1.h),
             child: Text(
               widget.description,
-              style: kRegular12,
+              style: kRegular12Black,
               softWrap: true,
             ),
           ),

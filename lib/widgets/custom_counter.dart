@@ -51,7 +51,7 @@ class _CustomCounterState extends State<CustomCounter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: 5.h, top: 1.h),
+      margin: EdgeInsets.only(right: 2.h, top: 1.h),
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,7 +73,7 @@ class _CustomCounterState extends State<CustomCounter> {
           Container(
             alignment: Alignment.center,
             height: 6.h,
-            width: 6.h,
+            width: 4.h,
             margin: EdgeInsets.symmetric(horizontal: 1.w),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(3.w),

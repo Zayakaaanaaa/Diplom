@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:grocery_store/model/product_detail.dart';
-import 'package:grocery_store/model/store.dart';
+import 'package:grocery_store/model/store/store.dart';
 
 class CartProduct {
   String product;

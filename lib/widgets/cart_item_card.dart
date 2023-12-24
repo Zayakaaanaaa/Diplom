@@ -7,7 +7,9 @@ import 'package:grocery_store/util/user.dart';
 import 'package:grocery_store/widgets/custom_counter.dart';
 import 'package:sizer/sizer.dart';
 
-class CartItem extends StatelessWidget {
+import '../pages/cart_screen.dart';
+
+class CartItem extends StatefulWidget {
   final CartProduct cartItem;
 
   const CartItem({
@@ -15,6 +17,11 @@ class CartItem extends StatelessWidget {
     required this.cartItem,
   });
 
+  @override
+  _CartItemState createState() => _CartItemState();
+}
+
+class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
     String? userId = UserPreferences.getUser();
@@ -36,11 +43,9 @@ class CartItem extends StatelessWidget {
         ],
       ),
       child: FutureBuilder<ProductDetail>(
-        future: groceryModel.getProductDetail1(cartItem.product),
+        future: groceryModel.getProductDetail1(widget.cartItem.product),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
-          }
+          if (snapshot.connectionState == ConnectionState.waiting) {}
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           }
@@ -54,6 +59,10 @@ class CartItem extends StatelessWidget {
               Image.network(
                 productDetail.img,
                 height: 8.h,
+                width: 10.h,
+              ),
+              SizedBox(
+                width: 1.w,
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -63,19 +72,20 @@ class CartItem extends StatelessWidget {
                     productDetail.name,
                     style: kProductDetailsNameTextStyle,
                   ),
-                  Text(
-                    "'",
-                    style: kRegular12,
+                  SizedBox(
+                    height: 1.h,
                   ),
                   CustomCounter(
-                    quantity: cartItem.quantity,
+                    quantity: widget.cartItem.quantity,
                     counterBorder: true,
                     buttonBorder: false,
                     onCounterChanged: (newQuantity) async {
                       try {
-                        cartItem.quantity = newQuantity;
+                        setState(() {
+                          widget.cartItem.quantity = newQuantity;
+                        });
                         await groceryModel.updateCartItemQuantity(
-                            userId, cartItem.prodcutDocId, newQuantity);
+                            userId, widget.cartItem.prodcutDocId, newQuantity);
                       } catch (e) {
                         print(e);
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -89,12 +99,34 @@ class CartItem extends StatelessWidget {
                 ],
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const Icon(Icons.close_rounded),
+                  IconButton(
+                    onPressed: () async {
+                      try {
+                        await groceryModel
+                            .deleteItem(widget.cartItem.prodcutDocId);
+                        setState(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CartScreen(),
+                            ),
+                          );
+                        });
+                      } catch (e) {
+                        print(e);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Error deleting item: $e')),
+                        );
+                      }
+                    },
+                    icon: Icon(Icons.close_rounded),
+                  ),
                   Text(
-                    "${GroceryModel.getCheapestPrice(productDetail.price).price.toStringAsFixed(2)}",
+                    ("₮${productDetail.emart! * widget.cartItem.quantity}"),
+                    overflow: TextOverflow.ellipsis,
                     style: kMedium12,
                   ),
                 ],

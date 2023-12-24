@@ -1,35 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:grocery_store/model/store.dart';
-import 'package:grocery_store/model/user.dart';
-import 'package:grocery_store/widgets/store_card.dart';
-import 'package:sizer/sizer.dart';
 
 import '../model/product_detail.dart';
-import '../model/store_price.dart';
-import '../pages/auth/login_screen.dart';
+import '../model/store/store.dart';
 import '../services/grocery.dart';
 import '../util/constants.dart';
 import '../util/user.dart';
-import 'product_card.dart';
-import 'product_card_container.dart';
-import 'text_button.dart';
+import '../widgets/category_card.dart';
+import '../widgets/product_card.dart';
+import '../widgets/product_card_container.dart';
+import '../widgets/text_button.dart';
+import 'auth/login_screen.dart';
 
-class UserProfile extends StatefulWidget {
-  final UserModel userData;
-  const UserProfile({super.key, required this.userData});
+class AddProductScreen extends StatefulWidget {
+  const AddProductScreen({super.key});
 
   @override
-  State<UserProfile> createState() => _UserProfileState();
+  State<AddProductScreen> createState() => _AddProductScreenState();
 }
 
-class _UserProfileState extends State<UserProfile> {
-  final List<ProductDetail> newProducts = GroceryModel.addProduct();
-  final List<StoreDetail> newStores = GroceryModel.addStore();
-
+class _AddProductScreenState extends State<AddProductScreen> {
   Future<List<ProductDetails>>? _products;
+  final List<StoreDetail> newStores = GroceryModel.addStore();
+  List<CategoryCard>? categoryCards = GroceryModel.getCategoryList();
 
   Future<void> loadData() async {
     _products = groceryModel.getAllProducts();
@@ -37,9 +31,8 @@ class _UserProfileState extends State<UserProfile> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    loadData();
     super.initState();
+    loadData();
   }
 
   @override
@@ -79,9 +72,58 @@ class _UserProfileState extends State<UserProfile> {
             TextButton(
               onPressed: () async {
                 for (ProductDetail product in newProducts) {
-                  await firestore
+                  DocumentReference productRef = await firestore
                       .collection('productDetails')
                       .add(product.toMap());
+                  String docId;
+                  switch (product.catId) {
+                    case 0:
+                      docId = 'Мах махан бүтээгдэхүүн';
+                      break;
+                    case 1:
+                      docId = 'Жимс хүнсний ногоо ';
+                      break;
+                    case 2:
+                      docId = 'Сүү сүүн бүтээгдэхүүн';
+                      break;
+                    case 3:
+                      docId = 'Цай кофе';
+                      break;
+                    case 4:
+                      docId = 'Талх нарийн боов';
+                      break;
+                    case 5:
+                      docId = 'Даршилсан нөөшилсөн';
+                      break;
+                    case 6:
+                      docId = 'Шингэн бүтээгдэхүүн';
+                      break;
+                    case 7:
+                      docId = 'Амттан';
+                      break;
+                    case 8:
+                      docId = 'Хоол амтлагч';
+                      break;
+                    default:
+                      docId = 'Бусад';
+                  }
+
+                  await firestore
+                      .collection('category')
+                      .doc(docId)
+                      .collection('products')
+                      .doc(productRef.id)
+                      .set(product.toMap());
+
+                  await firestore
+                      .collection('category')
+                      .doc(docId)
+                      .set({'docId': docId}, SetOptions(merge: true));
+
+                  await firestore
+                      .collection('productDetails')
+                      .doc(docId)
+                      .set({'id': docId}, SetOptions(merge: true));
                 }
                 print('success');
               },
